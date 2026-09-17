@@ -5,6 +5,8 @@ Almond's own browser computer-use rig, built on TypeSafe's decision model, plus 
 1. **Browser Use Olympics** — a benchmark for browser-using agents, built and hosted on [Almond](https://almond.build), the home for websites made with AI. One prompt, five events, one server-side clock, a Hall of Fame. Live at https://sites.almond.build/browser-use-olympics/ (Hall of Fame: https://sites.almond.build/browser-use-olympics/hall). Source: `olympics/`.
 2. **Almond-fastloop** — a ~200-line, dependency-free browser computer-use loop: Chrome DevTools state → a bounded choice decided by TypeSafe's Jev → an executor. It is Almond's own browser computer-use rig, built on TypeSafe's decision model, and the reference entry in the Olympics. Source: `almond-fastloop.mjs`, `olympics.mjs`.
 
+Read the [whitepaper](WHITEPAPER.md) (also at https://sites.almond.build/browser-use-olympics/whitepaper) for the loop, the results, and the benchmark rules.
+
 ## The prompt (same for every agent)
 
 ```

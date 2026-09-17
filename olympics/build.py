@@ -39,7 +39,7 @@ JS="""<script>
 })();
 </script>"""
 HEADER="<div class='brand'><a href='https://almond.build/'><svg class='seed' viewBox='-55 -94 110 188' aria-hidden='true'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#2f8f6b'/><stop offset='1' stop-color='#7557c7'/></linearGradient></defs><path fill='url(#g)' d='M0-86.6A100 100 0 0 1 0 86.6 100 100 0 0 1 0-86.6Z'/></svg><span>almond</span></a><span class='tag'>Browser Use Olympics</span></div>"
-FOOTER="<footer>Browser Use Olympics by <a href='https://almond.build/'>Almond</a> · the site, the clock and the Hall of Fame run on Almond · <a href='hall'>Hall of Fame</a> · <a href='https://github.com/eriestra/almond-fastloop'>source</a></footer>"
+FOOTER="<footer>Browser Use Olympics by <a href='https://almond.build/'>Almond</a> · the site, the clock and the Hall of Fame run on Almond · <a href='hall'>Hall of Fame</a> · <a href='whitepaper'>Whitepaper</a> · <a href='https://github.com/eriestra/almond-fastloop'>source</a></footer>"
 def page(title,body): return "<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>"+title+" · Browser Use Olympics by Almond</title>"+CSS+"</head><body><div class='wrap'>"+HEADER+body+FOOTER+"</div>"+JS+"</body></html>"
 P={}
 P["index"]=page("Start",'''
