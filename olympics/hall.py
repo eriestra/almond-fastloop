@@ -17,7 +17,7 @@ while True:
     recs += r.get("records") or []
     cursor = r.get("nextCursor") if r.get("hasMore") else None
     if not cursor: break
-RENAMES = {"fastloop": "Almond-fastloop"}
+RENAMES = {"fastloop": "Almond-fastloop", "Yeira Bot": "Grok"}
 runs = {}
 for r in recs:
     v = r.get("values") or {}
