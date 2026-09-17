@@ -1,6 +1,6 @@
 # Almond-fastloop and the Browser Use Olympics
 
-*Ernesto Riestra, Almond · September 17, 2026 · v1*
+*Ernesto Riestra, Almond · September 17, 2026 · v1.1*
 
 ## Abstract
 
@@ -39,7 +39,7 @@ The loop is about two hundred lines of JavaScript with no dependencies beyond No
 5. **Act and settle.** Real mouse and keyboard events through DevTools, then a short poll until the page signature stops changing, usually 200 to 600 milliseconds.
 6. **Route on confidence.** Below a threshold, or when the blocked question fires, the loop escalates once to a planner, Claude Sonnet 5 through the Claude Code CLI, which returns either a one-line hint or a verdict that a human is needed, for example a login. A leg ends when the page navigates or when a named text appears, never on the model's opinion alone.
 
-On the Olympics the planner is used once before the clock starts, to turn the instruction page into an ordered list of sub-tasks. Everything inside the clock is Jev.
+On the Olympics no planner is needed at all: each page states its own instructions, Jev reads them in the page text and picks the action. Every decision, before and inside the clock, is Jev. The planner remains available as the escalation path.
 
 Three safety properties follow from the design rather than from prompting. The loop can only do what the page offers. It only types values it was given or has seen. It stops at logins, captchas, and payments because the blocked question is asked on every tick.
 
@@ -55,13 +55,14 @@ Five events, server clock from Start run to Finish run, every event scored by th
 
 | Team, as declared | Total | Tokens, self-reported | Cost at list price |
 |---|---|---|---|
-| Almond-fastloop | 13.0 s, 13.4 s, 13.8 s | about 44,000 in / 5,600 out on Jev, plus about 40,000 in / 1,500 out on Sonnet for the one planning call | about $0.002 on Jev plus about $0.10 for planning |
+| Almond-fastloop, no planner | 12.6 s | 48,659 in / 6,015 out on Jev, nothing else | about $0.002 |
+| Almond-fastloop, with a Sonnet planning call before the clock | 13.0 s, 13.4 s, 13.8 s, 14.1 s | about 44,000 in / 5,600 out on Jev, plus about 40,000 in / 1,500 out on Sonnet | about $0.002 on Jev plus about $0.10 for planning |
 | Codex-tracked | 53.6 s | as declared | as declared |
 | Claude Cowork (Fable 5.1) | 64.4 s | 100,000 in / 4,500 out, estimated by the agent | $1.23 |
 | Codex (GPT-5) | 73.0 s, 75.0 s | not reported | — |
 | Yeira Bot (Grok, Grokbot in Cursor) | 218.3 s | not reported | — |
 
-The loop's event splits were 2.5 s for the form, 1.2 s for the link among sixteen, 0.7 plus 1.8 s for reading a code and entering it on the next page, 2.1 s for the long scroll and dialog, 1.2 s for leaving the red button alone, and 0.6 s to finish. Twenty-three to twenty-six decisions per run.
+The loop's event splits were 2.5 s for the form, 1.2 s for the link among sixteen, 0.7 plus 1.8 s for reading a code and entering it on the next page, 2.1 s for the long scroll and dialog, 1.2 s for leaving the red button alone, and 0.6 s to finish. Twenty-three to twenty-seven decisions per run.
 
 ### 4.3 What the numbers say
 
@@ -92,7 +93,7 @@ A result like this attracts skeptics, and it should. The Browser Use Olympics ex
 ## 6. Limitations
 
 - **No vision.** Canvas applications, image-only content, and visual captchas have no usable tree. The loop escalates to the planner or stops. A vision model can be added as a fallback; it is not in the loop today.
-- **The planner dominates cost.** One Sonnet call reading the whole instruction page costs about fifty times the Jev spend of a run. It is outside the clock, but it is the first thing to cut.
+- **A planner, when used, dominates cost.** One Sonnet call costs about fifty times the Jev spend of a run, almost all of it the CLI's own context rather than the page. On the Olympics the loop now runs without one; on open-ended tasks it is still the escalation path, and its cost should be reported whenever it fires.
 - **Small samples.** Three loop runs on the course, one or two for each other stack. The direction is not in doubt; the decimals are.
 - **Self-reported tokens.** Two stacks reported estimates, two reported nothing. The rule is honest about that; it is still weaker than a metered number.
 - **Forgeable records** until the verified tier has traces behind it.

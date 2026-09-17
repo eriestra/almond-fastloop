@@ -6,7 +6,7 @@ import { execFile } from "node:child_process";
 import { writeFileSync } from "node:fs";
 
 const START = process.env.BUO_URL || "https://sites.almond.build/browser-use-olympics/";
-const IDENTITY = { team: process.env.BUO_TEAM || "Almond-fastloop", model: "jev-latest", harness: "Almond-fastloop: DevTools+Jev, planner claude-sonnet-5" };
+const IDENTITY = { team: process.env.BUO_TEAM || "Almond-fastloop", model: "jev-latest", harness: process.env.BUO_PLANNER === "1" ? "Almond-fastloop: DevTools+Jev, planner claude-sonnet-5" : "Almond-fastloop: DevTools+Jev, no planner" };
 
 const planUsage = { in: 0, out: 0 };
 async function planCourse(state) {
@@ -29,29 +29,29 @@ Produce the ordered list of sub-tasks AFTER registration (registration is handle
 const t0 = performance.now();
 const cdp = await connect("browser-use-olympics");
 await cdp.send("Page.navigate", { url: START + "?new=1" }); await sleep(900);
-let state = await cdp.eval(STATE_JS); state.textSample = await cdp.eval("document.body.innerText.replace(/\\s+/g,' ').slice(0, 4000)");
-const tPlan = performance.now(); const course = await planCourse(state);
-if (course.length < 6) { console.log("planner returned only", course.length, "sub-tasks; aborting"); cdp.ws.close(); process.exit(2); } const planMs = Math.round(performance.now() - tPlan);
-console.log(`plan (${planMs} ms, before the clock):`); for (const c of course) console.log("  -", c.name, "|", c.goal.slice(0, 110), "|", JSON.stringify(c.data || {}));
+let state = await cdp.eval(STATE_JS);
+let course = null, planMs = 0;
+if (process.env.BUO_PLANNER === "1") { state.textSample = await cdp.eval("document.body.innerText.replace(/\\s+/g,' ').slice(0, 4000)"); const tPlan = performance.now(); course = await planCourse(state); planMs = Math.round(performance.now() - tPlan); console.log(`plan (${planMs} ms, before the clock):`); for (const c of course) console.log("  -", c.name, "|", c.goal.slice(0, 110), "|", JSON.stringify(c.data || {})); }
+else console.log("no planner: Jev reads each page's instructions directly");
 if (process.env.BUO_PLAN_ONLY) { console.log(JSON.stringify(course, null, 1)); cdp.ws.close(); process.exit(0); }
 
-if (course.length < 6) { console.log('planner returned only', course.length, 'sub-tasks; aborting before the clock starts'); cdp.ws.close(); process.exit(2); }
-course[course.length - 1].untilText = 'RESULT: run';
 const results = []; const memory = []; // values seen on earlier pages, shared across sub-tasks
 // Registration: identity is our own; clock starts when Start run is pressed.
 results.push(await run({ name: "register", goal: `Register the team: type the team, model and harness values into the registration form and press 'Start run'.`, data: IDENTITY, untilUrl: "/e1", noDone: true, _seen: memory }, cdp));
-for (const c of course) {
-  const task = { name: c.name, goal: c.goal, data: c.data || {}, untilText: c.untilText, noDone: true, _seen: memory };
-  if (c === course[course.length - 1]) { const tin = planUsage.in + results.reduce((a, r) => a + r.tokens, 0), tout = planUsage.out + results.reduce((a, r) => a + (r.tokens_out || 0), 0); task.data = { tokens_in: String(tin), tokens_out: String(tout), tokens_note: "Jev usage from API responses + one Claude planning call; excludes this finish leg" }; task.goal = `Type the token numbers into the three token fields (input tokens ${tin}, output tokens ${tout}, source note), then press 'Finish run'.`; }
-  if (!task.untilText) task.untilUrl = null; // ends on navigation: detect by URL change from current
-  const before = (await cdp.eval("location.href"));
-  task.untilUrlChangeFrom = before;
-  results.push(await runUntilNav(task, before));
+const LEG_GOAL = "Follow the instructions written on this page exactly (they name the values to type or the exact link or button to use), then continue to the next page via the link that appears.";
+for (let leg = 1; leg <= 12; leg++) {
+  const here = await cdp.eval("location.href");
+  if (here.includes("/finish")) break;
+  const c = course ? course[Math.min(leg - 1, course.length - 1)] : null;
+  const task = { name: c ? c.name : `leg ${leg} (${here.split("/").pop()})`, goal: c ? c.goal : LEG_GOAL, data: c ? (c.data || {}) : {}, noDone: true, _seen: memory };
+  results.push(await runWithNavWatch(task, here));
 }
+{ const tin = planUsage.in + results.reduce((a, r) => a + r.tokens, 0), tout = planUsage.out + results.reduce((a, r) => a + (r.tokens_out || 0), 0);
+  results.push(await run({ name: "finish", goal: `Type the token numbers into the three token fields (input tokens ${tin}, output tokens ${tout}, source note), then press 'Finish run'.`, data: { tokens_in: String(tin), tokens_out: String(tout), tokens_note: course ? "Jev usage from API responses + one Claude planning call; excludes this finish leg" : "Jev usage from API responses, no planner; excludes this finish leg" }, untilText: "RESULT: run", noDone: true, _seen: memory }, cdp)); }
 const finalText = await cdp.eval("(document.getElementById('r')||{}).textContent||''");
 const total = ((performance.now() - t0) / 1000).toFixed(1);
 console.log("\nRESULT:", finalText || "(no result line)");
-console.log(`sub-tasks: ${results.length}  decisions: ${results.reduce((a, r) => a + r.log.filter(l => l.decide_ms > 0).length, 0)}  jev tokens: ${results.reduce((a, r) => a + r.tokens, 0)} in / ${results.reduce((a, r) => a + (r.tokens_out || 0), 0)} out  planner: ${planUsage.in} in / ${planUsage.out} out  local wall incl. planning: ${total}s`);
+console.log(`legs: ${results.length}  decisions: ${results.reduce((a, r) => a + r.log.filter(l => l.decide_ms > 0).length, 0)}  jev tokens: ${results.reduce((a, r) => a + r.tokens, 0)} in / ${results.reduce((a, r) => a + (r.tokens_out || 0), 0)} out  planner: ${planUsage.in} in / ${planUsage.out} out  local wall incl. planning: ${total}s`);
 for (const r of results) console.log(`  ${r.task.padEnd(12)} ${r.final.padEnd(10)} ${r.steps} steps ${r.wall_s}s ${r.tokens} tok`);
 writeFileSync(`bench/olympics_fastloop_${Date.now()}.json`, JSON.stringify({ identity: IDENTITY, planMs, course, results, finalText }, null, 1));
 cdp.ws.close();

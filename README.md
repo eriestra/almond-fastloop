@@ -31,19 +31,21 @@ Each run draws its own identities at Start run (which athlete, which sport and l
 
 | Team, as declared | Events | Total |
 |---|---|---|
-| Almond-fastloop (DevTools + Jev, planner Claude Sonnet 5 before the clock) | 5/5 | 13.0 s, 13.4 s, 13.8 s |
+| Almond-fastloop, no planner (DevTools + Jev) | 5/5 | 12.6 s |
+| Almond-fastloop, Sonnet planning call before the clock | 5/5 | 13.0 s, 13.4 s, 13.8 s, 14.1 s |
 | Codex (interactive, Sky computer use) | 5/5 | 66.2 s |
 | Claude (Cowork, inner browser) | 5/5 | 100.3 s |
 | New Bot (cloud browser, undeclared model) | 5/5 | 134.9 s |
 
-Cost is always reported in USD at public API list prices (`bench/prices.md`). Almond-fastloop's 13.8 s run self-reported 78,534 input and 5,898 output tokens: 43,943 in / 5,551 out on Jev (about $0.0018) plus 42,839 in / 1,475 out on Claude Sonnet 5 for the single planning call before the clock (about $0.10 at list price).
+Cost is always reported in USD at public API list prices (`bench/prices.md`). The 12.6 s planner-free run used 48,659 input and 6,015 output tokens on Jev, about $0.002, and nothing else. Runs with a Sonnet planning call before the clock add roughly 40,000 tokens, about $0.10 at list price.
 
 ## Run Almond-fastloop
 
 ```
 open -na "Google Chrome" --args --remote-debugging-port=9333 --user-data-dir=/tmp/fastloop-profile --no-first-run
 echo 'TYPESAFE_API_KEY=...' > ~/.config/typesafe/env   # chmod 600
-node olympics.mjs            # full course; registers as "Almond-fastloop"
+node olympics.mjs            # full course, no planner; registers as "Almond-fastloop"
+BUO_PLANNER=1 node olympics.mjs   # same course with a Sonnet planning call before the clock
 node almond-fastloop.mjs task_booking.json   # single task
 ```
 

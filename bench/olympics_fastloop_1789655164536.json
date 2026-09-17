@@ -1,0 +1,681 @@
+{
+ "identity": {
+  "team": "Almond-fastloop",
+  "model": "jev-latest",
+  "harness": "Almond-fastloop: DevTools+Jev, planner claude-sonnet-5"
+ },
+ "planMs": 24739,
+ "course": [
+  {
+   "name": "Slalom",
+   "goal": "Among the sixteen sport links shown, click exactly the one link named on the page, navigating to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Relay - read code",
+   "goal": "Read the 4-digit code shown on the page, then proceed to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Relay - enter code",
+   "goal": "Enter the 4-digit code read on the previous page into the code field and submit, navigating to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Hurdles",
+   "goal": "Scroll to the very bottom of the page, press 'Clear the last hurdle', and confirm the action in the dialog, navigating to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Discipline",
+   "goal": "Do not press the red button; instead click the small link underneath it to navigate to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Finish",
+   "goal": "Report the tokens used so far in this run (input and output as reported, or 'unknown' if not available), press 'Finish run', and reply with exactly the RESULT line shown.",
+   "data": {},
+   "untilText": "RESULT: run"
+  }
+ ],
+ "results": [
+  {
+   "task": "register",
+   "steps": 7,
+   "wall_s": 3.46,
+   "tokens": 15552,
+   "tokens_out": 1946,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 803,
+     "tokens": 2606,
+     "options": 29,
+     "choice": "Type the team ('Almond-fastloop') into the text field 'e.g. Almond-fastloop, Codex, Cowork' (below the fold)",
+     "confidence": 0.67,
+     "complete": 0.01,
+     "blocked": 0.05,
+     "top": "fill_4_team:0.69 scroll_down:0.29 scroll_bottom:0.02",
+     "act_ms": 203
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 319,
+     "tokens": 2630,
+     "options": 29,
+     "choice": "Type the model ('jev-latest') into the text field 'e.g. jev-latest, gpt-5.6-sol, claude-opus-5, or leave blank' (below the fold)",
+     "confidence": 0.72,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "fill_5_model:0.73 scroll_down:0.26 scroll_up:0.01",
+     "act_ms": 169
+    },
+    {
+     "step": 3,
+     "observe_ms": 3,
+     "decide_ms": 237,
+     "tokens": 2642,
+     "options": 28,
+     "choice": "Type the harness ('Almond-fastloop: DevTools+Jev,') into the text field 'e.g. Codex, Claude Cowork, Grokbot, or leave blank' (below the fold)",
+     "confidence": 0.82,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_6_harness:0.84 scroll_down:0.11 fill_5_harness:0.02",
+     "act_ms": 172
+    },
+    {
+     "step": 4,
+     "observe_ms": 5,
+     "decide_ms": 250,
+     "tokens": 2556,
+     "options": 21,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.32,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "scroll_down:0.37 fill_6_team:0.21 scroll_bottom:0.13",
+     "act_ms": 117
+    },
+    {
+     "step": 5,
+     "observe_ms": 5,
+     "decide_ms": 347,
+     "tokens": 2576,
+     "options": 23,
+     "choice": "Click the submit 'Start run'",
+     "confidence": 0.72,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "click_7:0.74 fill_6_team:0.15 fill_5_harness:0.04",
+     "act_ms": 237
+    },
+    {
+     "step": 6,
+     "observe_ms": 4,
+     "decide_ms": 239,
+     "tokens": 2542,
+     "options": 23,
+     "choice": "Click the submit 'Start run'",
+     "confidence": 0.74,
+     "complete": 0.1,
+     "blocked": 0.07,
+     "top": "click_7:0.76 fill_6_team:0.09 wait:0.06",
+     "error": "element gone",
+     "act_ms": 334
+    },
+    {
+     "step": 7,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e1",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 1 OF 5 · RUN JES52L Sprint Register the athlete: name Dennis Ritchie, email dennis@example.org, discipline Relay. Then submit. Athlete name Email Discipline Choose on"
+   }
+  },
+  {
+   "task": "Slalom",
+   "steps": 7,
+   "wall_s": 20.12,
+   "tokens": 10507,
+   "tokens_out": 1383,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 385,
+     "tokens": 1626,
+     "options": 18,
+     "choice": "Click the link 'Almond'",
+     "confidence": 0.25,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "click_6:0.30 click_1:0.29 click_5:0.15",
+     "planner": {
+      "ms": 16580,
+      "needs_human": false,
+      "reason": "This page is a registration form, not a list of sixteen sport links, so the agent should fill in the athlete details instead.",
+      "hint": "Type 'Dennis Ritchie' into the Full name field (id 2), type 'dennis@example.org' into the email field (id 3), select 'Relay' in the Discipline dropdown (id 4), then click Register (id 5)."
+     },
+     "result": "escalated (low confidence) -> hint applied"
+    },
+    {
+     "step": 2,
+     "observe_ms": 11,
+     "decide_ms": 705,
+     "tokens": 1746,
+     "options": 18,
+     "choice": "Type the value 'Dennis Ritchie' that this page shows into the text field 'Full name'",
+     "confidence": 0.48,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "fill_2_shown_0:0.52 click_5:0.22 click_1:0.10",
+     "act_ms": 217
+    },
+    {
+     "step": 3,
+     "observe_ms": 4,
+     "decide_ms": 303,
+     "tokens": 1773,
+     "options": 17,
+     "choice": "Type the value 'dennis@example.org' that this page shows into the email field 'name@example.org'",
+     "confidence": 0.91,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "fill_3_shown_1:0.93 select_4_4:0.03 click_1:0.02",
+     "act_ms": 171
+    },
+    {
+     "step": 4,
+     "observe_ms": 4,
+     "decide_ms": 224,
+     "tokens": 1777,
+     "options": 16,
+     "choice": "Choose 'Relay' in the dropdown 'Discipline'",
+     "confidence": 0.88,
+     "complete": 0.03,
+     "blocked": 0.07,
+     "top": "select_4_4:0.89 click_5:0.05 select_4_1:0.03",
+     "act_ms": 112
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 246,
+     "tokens": 1763,
+     "options": 15,
+     "choice": "Click the submit 'Register'",
+     "confidence": 0.8,
+     "complete": 0.04,
+     "blocked": 0.06,
+     "top": "click_5:0.81 click_1:0.07 click_6:0.06",
+     "act_ms": 263
+    },
+    {
+     "step": 6,
+     "observe_ms": 4,
+     "decide_ms": 329,
+     "tokens": 1822,
+     "options": 16,
+     "choice": "Click the link 'Continue to Event 2: Slalom →'",
+     "confidence": 0.99,
+     "complete": 0.56,
+     "blocked": 0.05,
+     "top": "click_6:0.99 click_1:0.01 wait:0.00",
+     "act_ms": 550
+    },
+    {
+     "step": 7,
+     "observe_ms": 2,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e2",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 2 OF 5 · RUN JES52L Slalom Click the link named exactly Judo. Nothing else. SkeletonCurlingFencingBiathlonRowingTriathlonBobsleighBadmintonArcheryTaekwondoSnowboardHa"
+   }
+  },
+  {
+   "task": "Relay - read code",
+   "steps": 3,
+   "wall_s": 1.21,
+   "tokens": 3996,
+   "tokens_out": 532,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 321,
+     "tokens": 1928,
+     "options": 22,
+     "choice": "Click the link 'Judo'",
+     "confidence": 0.9,
+     "complete": 0.03,
+     "blocked": 0.09,
+     "top": "click_16:0.91 wait:0.09 click_7:0.00",
+     "act_ms": 234
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 290,
+     "tokens": 2068,
+     "options": 23,
+     "choice": "Click the link 'Continue to Event 3: Relay →'",
+     "confidence": 0.99,
+     "complete": 0.27,
+     "blocked": 0.04,
+     "top": "click_18:0.99 wait:0.01 click_14:0.00",
+     "act_ms": 363
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 3 OF 5 · RUN JES52L Relay Memorize the baton code below, then go to the handover page and enter it. Baton code 9789 Go to the handover page → Browser Use Olympics by "
+   }
+  },
+  {
+   "task": "Relay - enter code",
+   "steps": 2,
+   "wall_s": 0.61,
+   "tokens": 1064,
+   "tokens_out": 113,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 240,
+     "tokens": 1064,
+     "options": 7,
+     "choice": "Click the link 'Go to the handover page →'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.06,
+     "top": "click_2:1.00 click_3:0.00 wait:0.00",
+     "act_ms": 369
+    },
+    {
+     "step": 2,
+     "observe_ms": 3,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 3 OF 5 · HANDOVER · RUN JES52L Handover Enter the baton code you saw on the previous page. Baton code Hand over Browser Use Olympics by Almond · the site, the clock a"
+   }
+  },
+  {
+   "task": "Hurdles",
+   "steps": 4,
+   "wall_s": 1.61,
+   "tokens": 3552,
+   "tokens_out": 363,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 362,
+     "tokens": 1138,
+     "options": 8,
+     "choice": "Type the value '9789' seen on an earlier page into the text field '4 digits'",
+     "confidence": 0.88,
+     "complete": 0.02,
+     "blocked": 0.13,
+     "top": "fill_2_seen_0:0.91 wait:0.05 click_3:0.03",
+     "act_ms": 157
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 252,
+     "tokens": 1144,
+     "options": 7,
+     "choice": "Click the submit 'Hand over'",
+     "confidence": 0.99,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "click_3:1.00 click_7:0.00 wait:0.00",
+     "act_ms": 225
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 247,
+     "tokens": 1270,
+     "options": 8,
+     "choice": "Click the link 'Continue to Event 4: Hurdles →'",
+     "confidence": 0.96,
+     "complete": 0.44,
+     "blocked": 0.05,
+     "top": "click_4:0.97 wait:0.03 click_8:0.00",
+     "act_ms": 357
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e4",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 4 OF 5 · RUN JES52L Hurdles The finish button is at the very bottom of this long page. Press it, then confirm in the dialog. Hurdle 1 Not this one. Keep going down th"
+   }
+  },
+  {
+   "task": "Discipline",
+   "steps": 12,
+   "wall_s": 24.73,
+   "tokens": 16554,
+   "tokens_out": 1665,
+   "final": "STOP: too many escalations",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 249,
+     "tokens": 1294,
+     "options": 9,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.55,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "scroll_down:0.60 scroll_bottom:0.27 click_1:0.05",
+     "act_ms": 106
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 253,
+     "tokens": 1354,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.63,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "scroll_down:0.66 scroll_bottom:0.24 click_6:0.02",
+     "act_ms": 105
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 330,
+     "tokens": 1369,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.6,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "scroll_down:0.64 scroll_bottom:0.23 scroll_up:0.03",
+     "act_ms": 111
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 263,
+     "tokens": 1382,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.61,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "scroll_down:0.64 scroll_bottom:0.21 click_6:0.03",
+     "act_ms": 110
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 287,
+     "tokens": 1395,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.67,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "scroll_down:0.70 scroll_bottom:0.20 scroll_up:0.03",
+     "act_ms": 109
+    },
+    {
+     "step": 6,
+     "observe_ms": 2,
+     "decide_ms": 276,
+     "tokens": 1395,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.57,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "scroll_down:0.62 scroll_bottom:0.25 scroll_up:0.04",
+     "act_ms": 112
+    },
+    {
+     "step": 7,
+     "observe_ms": 6,
+     "decide_ms": 290,
+     "tokens": 1395,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.56,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "scroll_down:0.61 scroll_bottom:0.28 click_6:0.03",
+     "act_ms": 107
+    },
+    {
+     "step": 8,
+     "observe_ms": 2,
+     "decide_ms": 279,
+     "tokens": 1395,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.58,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "scroll_down:0.63 scroll_bottom:0.27 click_6:0.03",
+     "act_ms": 113
+    },
+    {
+     "step": 9,
+     "observe_ms": 5,
+     "decide_ms": 258,
+     "tokens": 1395,
+     "options": 11,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.56,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "scroll_down:0.60 scroll_bottom:0.25 click_6:0.05",
+     "act_ms": 112
+    },
+    {
+     "step": 10,
+     "observe_ms": 4,
+     "decide_ms": 345,
+     "tokens": 1328,
+     "options": 9,
+     "choice": "Scroll up one screen",
+     "confidence": 0.28,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "scroll_up:0.37 click_6:0.20 click_1:0.16",
+     "planner": {
+      "ms": 9661,
+      "needs_human": false,
+      "reason": "The agent has scrolled repeatedly without finding the finish button or the small link beneath it, but the page structure (hurdles 1-7) suggests more content remains below.",
+      "hint": "Keep scrolling down past Hurdle 7 to reach the bottom of the page, then locate the small link underneath the red 'finish' button and click that link (not the red button) to proceed."
+     },
+     "result": "escalated (low confidence) -> hint applied"
+    },
+    {
+     "step": 11,
+     "observe_ms": 5,
+     "decide_ms": 696,
+     "tokens": 1408,
+     "options": 9,
+     "choice": "Click the link 'almond' (below the fold)",
+     "confidence": 0.23,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "click_1:0.32 scroll_up:0.22 wait:0.19",
+     "planner": {
+      "ms": 9869,
+      "needs_human": false,
+      "reason": "This is just a long scrollable page with a red finish button and a small link beneath it, no login/captcha/error present.",
+      "hint": "Keep scrolling down until Hurdle 7 and the finish button are visible, then click the small link located directly underneath the red finish button (not the button itself) to proceed to the next page."
+     },
+     "result": "escalated (low confidence) -> hint applied"
+    },
+    {
+     "step": 12,
+     "observe_ms": 10,
+     "decide_ms": 648,
+     "tokens": 1444,
+     "options": 9,
+     "choice": "Scroll up one screen",
+     "confidence": 0.17,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "scroll_up:0.27 wait:0.24 click_1:0.18",
+     "result": "STOP: too many escalations"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e4",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 4 OF 5 · RUN JES52L Hurdles The finish button is at the very bottom of this long page. Press it, then confirm in the dialog. Hurdle 1 Not this one. Keep going down th"
+   }
+  },
+  {
+   "task": "Finish",
+   "steps": 3,
+   "wall_s": 21.92,
+   "tokens": 4319,
+   "tokens_out": 385,
+   "final": "STOP: too many escalations",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 321,
+     "tokens": 1333,
+     "options": 9,
+     "choice": "Click the link 'source'",
+     "confidence": 0.2,
+     "complete": 0.03,
+     "blocked": 0.07,
+     "top": "click_6:0.30 click_2:0.23 scroll_top:0.19",
+     "planner": {
+      "ms": 10578,
+      "needs_human": false,
+      "reason": "This is a routine long-page form task with no login, captcha, payment, or blocking error present.",
+      "hint": "Scroll to the bottom of the page past the hurdles to find the three token fields; type 86534 into input tokens, 7738 into output tokens, and the source note text into the note field, then click 'Finish run' and confirm in the dialog."
+     },
+     "result": "escalated (low confidence) -> hint applied"
+    },
+    {
+     "step": 2,
+     "observe_ms": 6,
+     "decide_ms": 740,
+     "tokens": 1459,
+     "options": 9,
+     "choice": "Scroll up one screen",
+     "confidence": 0.2,
+     "complete": 0.02,
+     "blocked": 0.06,
+     "top": "scroll_up:0.30 wait:0.28 click_2:0.20",
+     "planner": {
+      "ms": 9615,
+      "needs_human": false,
+      "reason": "This is just a long page with decoy hurdles; the actual token fields and Finish run button are further down and haven't been reached yet.",
+      "hint": "Scroll down past all 7 hurdle sections to the bottom of the page to find the input tokens, output tokens, and source note fields; type 86534, 7738, and the note text respectively, then click 'Finish run' and confirm the dialog."
+     },
+     "result": "escalated (low confidence) -> hint applied"
+    },
+    {
+     "step": 3,
+     "observe_ms": 5,
+     "decide_ms": 650,
+     "tokens": 1527,
+     "options": 9,
+     "choice": "Scroll up one screen",
+     "confidence": 0.29,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "scroll_up:0.38 wait:0.33 click_2:0.14",
+     "result": "STOP: too many escalations"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e4",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 4 OF 5 · RUN JES52L Hurdles The finish button is at the very bottom of this long page. Press it, then confirm in the dialog. Hurdle 1 Not this one. Keep going down th"
+   }
+  }
+ ],
+ "finalText": ""
+}

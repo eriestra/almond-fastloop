@@ -21,7 +21,7 @@ export async function connect(urlMatch) {
   const ws = new WebSocket(page.webSocketDebuggerUrl);
   await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
   const cdp = new CDP(ws);
-  await cdp.send("Page.enable"); await cdp.send("Runtime.enable"); await cdp.send("DOM.enable");
+  await cdp.send("Page.enable"); await cdp.send("Runtime.enable"); await cdp.send("DOM.enable"); await cdp.send("Page.bringToFront").catch(() => {});
   return cdp;
 }
 
@@ -86,6 +86,13 @@ export function buildOptions(state, task) {
   }
   const inViewCount = Object.values(acts).filter(a => a.id && state.elements.find(e => e.id === a.id)?.inViewport).length;
   if (inViewCount >= 12) { for (const [k, a] of Object.entries(acts)) { const e = a.id && state.elements.find(e => e.id === a.id); if (e && !e.inViewport && a.type !== 'attach') { delete opts[k]; delete acts[k]; } } }
+  const MAXO = 40; const keys = Object.keys(opts);
+  if (keys.length > MAXO) {
+    const goalWords = new Set((task.goal + " " + Object.values(task.data || {}).join(" ")).toLowerCase().split(/[^a-z0-9áéíóúñ]+/).filter(w => w.length > 3));
+    const changed = new Set((task._lastChange || "").toLowerCase().split(/[^a-z0-9áéíóúñ]+/));
+    const score = k => { const l = opts[k].toLowerCase(); let s = 0; for (const w of goalWords) if (l.includes(w)) s += 3; for (const w of changed) if (w.length > 3 && l.includes(w)) s += 2; const e = acts[k].id && state.elements.find(e => e.id === acts[k].id); if (e && e.inViewport) s += 1; if (acts[k].type === "fill" || acts[k].type === "select" || acts[k].type === "attach") s += 2; return s; };
+    for (const k of keys.sort((a, b) => score(b) - score(a)).slice(MAXO)) { delete opts[k]; delete acts[k]; }
+  }
   if (state.scrollY + state.viewportHeight < state.pageHeight - 20) { add("scroll_down", "Scroll down one screen to see more of the page", { type: "scroll", dy: 1 }); add("scroll_bottom", "Jump to the very bottom of the page", { type: "jump", to: "bottom" }); }
   if (state.scrollY > 0) { add("scroll_up", "Scroll up one screen", { type: "scroll", dy: -1 }); add("scroll_top", "Jump to the top of the page", { type: "jump", to: "top" }); }
   add("wait", "Wait a moment for the page to change", { type: "wait" });
@@ -114,6 +121,7 @@ export async function decide(state, task, history, change, opts) {
 export const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 export async function center(cdp, id) { await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${id}"]'); if (el) el.scrollIntoView({ block: 'nearest', inline: 'nearest' }); })()`); await sleep(40); return cdp.eval(`(() => { const el = document.querySelector('[data-fl="${id}"]'); if (!el) return null; const r = el.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; })()`); }
 export async function act(cdp, a, task = {}) {
+  await cdp.send("Page.bringToFront").catch(() => {}); // input events are not delivered to a background tab
   if (a.type === "click") { const c = await center(cdp, a.id); if (!c) throw new Error("element gone"); await sleep(60); for (const type of ["mouseMoved", "mousePressed", "mouseReleased"]) await cdp.send("Input.dispatchMouseEvent", { type, x: c.x, y: c.y, button: "left", clickCount: 1 }); }
   else if (a.type === "fill") { const c = await center(cdp, a.id); if (!c) throw new Error("element gone"); for (const type of ["mousePressed", "mouseReleased"]) await cdp.send("Input.dispatchMouseEvent", { type, x: c.x, y: c.y, button: "left", clickCount: 1 }); await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${a.id}"]'); el.focus(); if (el.select) el.select(); else if (el.isContentEditable) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } })()`); if (a.replace) await cdp.send("Input.dispatchKeyEvent", { type: "keyDown", key: "a", code: "KeyA", modifiers: 4, commands: ["selectAll"] }); await cdp.send("Input.insertText", { text: a.text }); }
   else if (a.type === "select") { await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${a.id}"]'); el.selectedIndex = ${a.index}; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); })()`); }
@@ -122,7 +130,7 @@ export async function act(cdp, a, task = {}) {
   else if (a.type === "jump") { await cdp.eval(a.to === "bottom" ? "window.scrollTo(0, document.body.scrollHeight)" : "window.scrollTo(0, 0)"); }
   else if (a.type === "wait") { await sleep(500); }
 }
-export async function settle(cdp) { let last = null; const t = performance.now(); while (performance.now() - t < 1500) { await sleep(last === null ? 80 : 60); const s = await cdp.eval(STATE_JS); const k = sig(s); if (s.ready === "complete" && k === last) return s; last = k; } return cdp.eval(STATE_JS); }
+export async function settle(cdp) { let last = null; const t = performance.now(); while (performance.now() - t < 1500) { await sleep(last === null ? 60 : 40); const s = await cdp.eval(STATE_JS); const k = sig(s); if (s.ready === "complete" && k === last) return s; last = k; } return cdp.eval(STATE_JS); }
 
 // ---------- planner fallback (Claude, headless) ----------
 import { execFile } from "node:child_process";
@@ -144,7 +152,7 @@ export async function run(task, existing) {
     const tObs = performance.now(); state = await cdp.eval(STATE_JS); const change = diff(prev, state); const obsMs = performance.now() - tObs;
     for (const m of (state.textSample.match(/\b\d{4,8}\b/g) || [])) { task._seen = task._seen || []; if (!task._seen.includes(m) && task._seen.length < 5) task._seen.push(m); }
     if ((task.untilUrl && state.url.includes(task.untilUrl)) || (task.untilText && state.textSample.includes(task.untilText))) { log.push({ step, observe_ms: Math.round(obsMs), decide_ms: 0, tokens: 0, options: 0, choice: '(condition met)', confidence: 1, complete: 1, blocked: 0, top: '', result: 'DONE' }); break; }
-    const { opts, acts } = buildOptions(state, task);
+    task._lastChange = change; const { opts, acts } = buildOptions(state, task);
     const d = await decide(state, task, history, change, opts); totalTokens += d.usage.input_tokens; totalOut += d.usage.output_tokens || 0;
     const a = d.answers; const choice = a.next.choice; const conf = a.next.confidence; const top = Object.entries(a.next.probabilities).sort((x, y) => y[1] - x[1]).slice(0, 3).map(([k, v]) => `${k}:${v.toFixed(2)}`).join(" ");
     const row = { step, observe_ms: Math.round(obsMs), decide_ms: Math.round(d.ms), tokens: d.usage.input_tokens, options: Object.keys(opts).length, choice: opts[choice], confidence: +conf.toFixed(2), complete: +a.complete.noul.toFixed(2), blocked: +a.blocked.noul.toFixed(2), top };
