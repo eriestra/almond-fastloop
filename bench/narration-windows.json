@@ -1,0 +1,50 @@
+[
+ {
+  "i": 1,
+  "start": 0.5,
+  "len": 10,
+  "text": "This is Almond-fastloop, a browser agent that reads the page instead of screenshots, and decides every step in a quarter of a second."
+ },
+ {
+  "i": 2,
+  "start": 10.5,
+  "len": 12,
+  "text": "We are about to run it through the Browser Use Olympics: a benchmark with five events, one server-side clock, and one prompt, visit this page and follow the instructions."
+ },
+ {
+  "i": 3,
+  "start": 22.5,
+  "len": 12,
+  "text": "The page carries the tasks: fill a form, find one link among sixteen, carry a code across pages, reach a hidden button, and leave a red button alone."
+ },
+ {
+  "i": 4,
+  "start": 34.5,
+  "len": 14,
+  "text": "Before the clock starts, the loop reads the instructions once and plans. Then every action comes from TypeSafe's Jev, a decision model that picks from the buttons and fields actually on the page."
+ },
+ {
+  "i": 5,
+  "start": 48.5,
+  "len": 10,
+  "text": "No screenshots, no frontier model in the loop, nothing to hallucinate from. The clock starts the moment it presses Start run."
+ },
+ {
+  "i": 6,
+  "start": 58.5,
+  "len": 10,
+  "text": "Watch the pace: the form, the link, the relay code read on one page and typed on the next, each decision a few hundred milliseconds."
+ },
+ {
+  "i": 7,
+  "start": 68.5,
+  "len": 8,
+  "text": "The scroll, the dialog, the red button untouched. At the finish it reports its own tokens."
+ },
+ {
+  "i": 8,
+  "start": 75.5,
+  "len": 11.7,
+  "text": "Thirteen point four seconds, five for five, a fifth of a cent. Codex over fifty, Claude sixty-four, Grok two hundred. It is all on the Hall of Fame, and the code is open."
+ }
+]

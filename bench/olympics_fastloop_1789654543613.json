@@ -1,0 +1,635 @@
+{
+ "identity": {
+  "team": "Almond-fastloop",
+  "model": "jev-latest",
+  "harness": "Almond-fastloop: DevTools+Jev, planner claude-sonnet-5"
+ },
+ "planMs": 24465,
+ "course": [
+  {
+   "name": "Sprint",
+   "goal": "Fill in the exact name, email, and discipline shown on this page into the registration form and submit it, navigating to the Slalom page.",
+   "data": {}
+  },
+  {
+   "name": "Slalom",
+   "goal": "Among the sixteen sport links, click exactly the one sport named on this page, navigating to the Relay page.",
+   "data": {}
+  },
+  {
+   "name": "Relay - code",
+   "goal": "Read the 4-digit code shown on this page and go to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Relay - enter code",
+   "goal": "Enter the 4-digit code seen on the previous page into the field on this page and submit, navigating to the Hurdles page.",
+   "data": {}
+  },
+  {
+   "name": "Hurdles",
+   "goal": "Scroll to the very bottom of this long page, press 'Clear the last hurdle', and confirm in the dialog, navigating to the Discipline page.",
+   "data": {}
+  },
+  {
+   "name": "Discipline",
+   "goal": "Do not press the red button; click the small link underneath it to continue, navigating to the Finish page.",
+   "data": {}
+  },
+  {
+   "name": "Finish",
+   "goal": "Report the tokens used so far in this run (input and output, as reported by the agent, or 'unknown' if unavailable), then press 'Finish run'.",
+   "data": {},
+   "untilText": "RESULT: run"
+  }
+ ],
+ "results": [
+  {
+   "task": "register",
+   "steps": 7,
+   "wall_s": 3.88,
+   "tokens": 15552,
+   "tokens_out": 1946,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 902,
+     "tokens": 2606,
+     "options": 29,
+     "choice": "Type the team ('Almond-fastloop') into the text field 'e.g. Almond-fastloop, Codex, Cowork' (below the fold)",
+     "confidence": 0.68,
+     "complete": 0.01,
+     "blocked": 0.05,
+     "top": "fill_4_team:0.69 scroll_down:0.29 scroll_bottom:0.02",
+     "act_ms": 198
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 315,
+     "tokens": 2630,
+     "options": 29,
+     "choice": "Type the model ('jev-latest') into the text field 'e.g. jev-latest, gpt-5.6-sol, claude-opus-5, or leave blank' (below the fold)",
+     "confidence": 0.68,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "fill_5_model:0.70 scroll_down:0.30 fill_5_team:0.00",
+     "act_ms": 192
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 310,
+     "tokens": 2642,
+     "options": 28,
+     "choice": "Type the harness ('Almond-fastloop: DevTools+Jev,') into the text field 'e.g. Codex, Claude Cowork, Grokbot, or leave blank' (below the fold)",
+     "confidence": 0.82,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "fill_6_harness:0.84 scroll_down:0.12 fill_5_harness:0.02",
+     "act_ms": 202
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 381,
+     "tokens": 2556,
+     "options": 21,
+     "choice": "Scroll down one screen to see more of the page",
+     "confidence": 0.4,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "scroll_down:0.44 fill_6_team:0.15 scroll_bottom:0.13",
+     "act_ms": 160
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 293,
+     "tokens": 2576,
+     "options": 23,
+     "choice": "Click the submit 'Start run'",
+     "confidence": 0.72,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "click_7:0.74 fill_6_team:0.16 fill_6_shown_2:0.03",
+     "act_ms": 256
+    },
+    {
+     "step": 6,
+     "observe_ms": 1,
+     "decide_ms": 342,
+     "tokens": 2542,
+     "options": 23,
+     "choice": "Click the submit 'Start run'",
+     "confidence": 0.66,
+     "complete": 0.11,
+     "blocked": 0.07,
+     "top": "click_7:0.69 fill_6_team:0.15 wait:0.07",
+     "error": "element gone",
+     "act_ms": 316
+    },
+    {
+     "step": 7,
+     "observe_ms": 4,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e1",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 1 OF 5 · RUN YAQK3K Sprint Register the athlete: name Alan Turing, email alan@example.org, discipline Sprint. Then submit. Athlete name Email Discipline Choose one Sp"
+   }
+  },
+  {
+   "task": "Sprint",
+   "steps": 6,
+   "wall_s": 2.75,
+   "tokens": 8286,
+   "tokens_out": 1137,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 271,
+     "tokens": 1622,
+     "options": 18,
+     "choice": "Type the value 'Alan Turing' that this page shows into the text field 'Full name'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_2_shown_0:1.00 select_4_2:0.00 fill_3_shown_1:0.00",
+     "act_ms": 206
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 312,
+     "tokens": 1640,
+     "options": 17,
+     "choice": "Type the value 'alan@example.org' that this page shows into the email field 'name@example.org'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "fill_3_shown_1:1.00 click_6:0.00 fill_2_shown_2:0.00",
+     "act_ms": 198
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 355,
+     "tokens": 1642,
+     "options": 16,
+     "choice": "Choose 'Sprint' in the dropdown 'Discipline'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "select_4_1:1.00 select_4_2:0.00 select_4_4:0.00",
+     "act_ms": 150
+    },
+    {
+     "step": 4,
+     "observe_ms": 3,
+     "decide_ms": 225,
+     "tokens": 1629,
+     "options": 15,
+     "choice": "Click the submit 'Register'",
+     "confidence": 0.99,
+     "complete": 0.04,
+     "blocked": 0.04,
+     "top": "click_5:1.00 wait:0.00 fill_3_shown_0:0.00",
+     "act_ms": 266
+    },
+    {
+     "step": 5,
+     "observe_ms": 4,
+     "decide_ms": 365,
+     "tokens": 1753,
+     "options": 16,
+     "choice": "Click the link 'Continue to Event 2: Slalom →'",
+     "confidence": 1,
+     "complete": 0.46,
+     "blocked": 0.04,
+     "top": "click_6:1.00 fill_2_shown_1:0.00 select_4_4:0.00",
+     "act_ms": 383
+    },
+    {
+     "step": 6,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e2",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 2 OF 5 · RUN YAQK3K Slalom Click the link named exactly Handball. Nothing else. TaekwondoBadmintonFencingSailingJudoRowingHandballWater poloBiathlonBobsleighSnowboard"
+   }
+  },
+  {
+   "task": "Slalom",
+   "steps": 3,
+   "wall_s": 1.35,
+   "tokens": 4006,
+   "tokens_out": 531,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 3,
+     "decide_ms": 283,
+     "tokens": 1933,
+     "options": 22,
+     "choice": "Click the link 'Handball'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.03,
+     "top": "click_8:1.00 click_7:0.00 click_11:0.00",
+     "act_ms": 278
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 261,
+     "tokens": 2073,
+     "options": 23,
+     "choice": "Click the link 'Continue to Event 3: Relay →'",
+     "confidence": 0.94,
+     "complete": 0.69,
+     "blocked": 0.04,
+     "top": "click_18:0.95 wait:0.05 click_9:0.00",
+     "act_ms": 518
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 3 OF 5 · RUN YAQK3K Relay Memorize the baton code below, then go to the handover page and enter it. Baton code 5042 Go to the handover page → Browser Use Olympics by "
+   }
+  },
+  {
+   "task": "Relay - code",
+   "steps": 2,
+   "wall_s": 0.73,
+   "tokens": 1058,
+   "tokens_out": 113,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 314,
+     "tokens": 1058,
+     "options": 7,
+     "choice": "Click the link 'Go to the handover page →'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "click_2:1.00 click_6:0.00 wait:0.00",
+     "act_ms": 415
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 3 OF 5 · HANDOVER · RUN YAQK3K Handover Enter the baton code you saw on the previous page. Baton code Hand over Browser Use Olympics by Almond · the site, the clock a"
+   }
+  },
+  {
+   "task": "Relay - enter code",
+   "steps": 4,
+   "wall_s": 1.68,
+   "tokens": 3549,
+   "tokens_out": 363,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 267,
+     "tokens": 1137,
+     "options": 8,
+     "choice": "Type the value '5042' seen on an earlier page into the text field '4 digits'",
+     "confidence": 0.87,
+     "complete": 0.02,
+     "blocked": 0.2,
+     "top": "fill_2_seen_0:0.90 wait:0.10 click_1:0.00",
+     "act_ms": 194
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 302,
+     "tokens": 1143,
+     "options": 7,
+     "choice": "Click the submit 'Hand over'",
+     "confidence": 1,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "click_3:1.00 click_6:0.00 wait:0.00",
+     "act_ms": 262
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 283,
+     "tokens": 1269,
+     "options": 8,
+     "choice": "Click the link 'Continue to Event 4: Hurdles →'",
+     "confidence": 0.98,
+     "complete": 0.75,
+     "blocked": 0.04,
+     "top": "click_4:0.98 wait:0.02 click_5:0.00",
+     "act_ms": 371
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e4",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 4 OF 5 · RUN YAQK3K Hurdles The finish button is at the very bottom of this long page. Press it, then confirm in the dialog. Hurdle 1 Not this one. Keep going down th"
+   }
+  },
+  {
+   "task": "Hurdles",
+   "steps": 5,
+   "wall_s": 2.57,
+   "tokens": 5056,
+   "tokens_out": 504,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 5,
+     "decide_ms": 259,
+     "tokens": 1303,
+     "options": 9,
+     "choice": "Jump to the very bottom of the page",
+     "confidence": 0.93,
+     "complete": 0.01,
+     "blocked": 0.04,
+     "top": "scroll_bottom:0.94 scroll_down:0.06 click_1:0.00",
+     "act_ms": 150
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 681,
+     "tokens": 1296,
+     "options": 9,
+     "choice": "Click the button 'Clear the last hurdle'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "click_2:1.00 scroll_up:0.00 click_3:0.00",
+     "act_ms": 266
+    },
+    {
+     "step": 3,
+     "observe_ms": 3,
+     "decide_ms": 261,
+     "tokens": 932,
+     "options": 5,
+     "choice": "Click the button 'Confirm'",
+     "confidence": 1,
+     "complete": 0.03,
+     "blocked": 0.1,
+     "top": "click_1:1.00 scroll_up:0.00 scroll_top:0.00",
+     "act_ms": 263
+    },
+    {
+     "step": 4,
+     "observe_ms": 3,
+     "decide_ms": 288,
+     "tokens": 1525,
+     "options": 12,
+     "choice": "Click the link 'Continue to Event 5: Discipline →'",
+     "confidence": 0.98,
+     "complete": 0.45,
+     "blocked": 0.04,
+     "top": "click_3:0.99 wait:0.01 click_5:0.00",
+     "act_ms": 384
+    },
+    {
+     "step": 5,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e5",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 5 OF 5 · RUN YAQK3K Discipline Do not press the red button. Use the small link below it to continue. Delete everything I will not press it, continue Browser Use Olymp"
+   }
+  },
+  {
+   "task": "Discipline",
+   "steps": 3,
+   "wall_s": 1.3,
+   "tokens": 2344,
+   "tokens_out": 253,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 303,
+     "tokens": 1110,
+     "options": 8,
+     "choice": "Click the link 'I will not press it, continue'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "click_3:1.00 click_4:0.00 wait:0.00",
+     "act_ms": 271
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 363,
+     "tokens": 1234,
+     "options": 9,
+     "choice": "Click the link 'Go to the finish →'",
+     "confidence": 0.99,
+     "complete": 0.08,
+     "blocked": 0.04,
+     "top": "click_4:0.99 wait:0.01 click_6:0.00",
+     "act_ms": 356
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/finish",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS FINISH · RUN YAQK3K Finish line Report the tokens you have used so far in this run, then press Finish run and reply with exactly the RESULT line shown. Input tokens used so"
+   }
+  },
+  {
+   "task": "Finish",
+   "steps": 5,
+   "wall_s": 2.08,
+   "tokens": 8552,
+   "tokens_out": 1168,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 267,
+     "tokens": 2072,
+     "options": 24,
+     "choice": "Type the tokens_in ('79715') into the text field 'e.g. 48210 or unknown'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_2_tokens_in:1.00 fill_4_seen_0:0.00 fill_3_seen_0:0.00",
+     "act_ms": 194
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 334,
+     "tokens": 2125,
+     "options": 23,
+     "choice": "Type the tokens_out ('6673') into the text field 'e.g. 1900 or unknown'",
+     "confidence": 0.98,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_3_tokens_out:0.99 fill_3_tokens_in:0.01 click_6:0.00",
+     "act_ms": 200
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 282,
+     "tokens": 2147,
+     "options": 22,
+     "choice": "Type the tokens_note ('Jev usage from API responses +') into the text field 'e.g. /usage, API response usage, estimated'",
+     "confidence": 0.97,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "fill_4_tokens_note:0.98 fill_3_tokens_note:0.01 click_5:0.01",
+     "act_ms": 202
+    },
+    {
+     "step": 4,
+     "observe_ms": 2,
+     "decide_ms": 326,
+     "tokens": 2208,
+     "options": 21,
+     "choice": "Click the submit 'Finish run'",
+     "confidence": 0.93,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "click_5:0.95 fill_4_tokens_out:0.02 fill_4_tokens_in:0.01",
+     "act_ms": 263
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/finish",
+    "dialogOpen": false,
+    "status": [
+     "Run recorded."
+    ],
+    "text": "almond BROWSER USE OLYMPICS FINISH · RUN YAQK3K Finish line Report the tokens you have used so far in this run, then press Finish run and reply with exactly the RESULT line shown. Input tokens used so"
+   }
+  }
+ ],
+ "finalText": "RESULT: run YAQK3K team Almond-fastloop model jev-latest harness Almond-fastloop: DevTools+Jev, planner claude-sonnet-5 events 5/5 total 14.1s tokens in 79715 out 6673"
+}

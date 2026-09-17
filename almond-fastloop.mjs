@@ -9,19 +9,19 @@ const MIN_CONF = Number(process.env.FL_MIN_CONF || 0.3);
 
 // ---------- CDP ----------
 export class CDP {
-  constructor(ws) { this.ws = ws; this.id = 0; this.pending = new Map(); this.events = []; ws.onmessage = (m) => { const o = JSON.parse(m.data); if (o.id && this.pending.has(o.id)) { const { res, rej } = this.pending.get(o.id); this.pending.delete(o.id); o.error ? rej(new Error(o.error.message)) : res(o.result); } else if (o.method) this.events.push(o); }; }
+  constructor(ws) { this.ws = ws; this.id = 0; this.pending = new Map(); this.events = []; ws.onclose = () => { for (const { rej } of this.pending.values()) rej(new Error("devtools connection closed")); this.pending.clear(); }; ws.onmessage = (m) => { const o = JSON.parse(m.data); if (o.id && this.pending.has(o.id)) { const { res, rej } = this.pending.get(o.id); this.pending.delete(o.id); o.error ? rej(new Error(o.error.message)) : res(o.result); } else if (o.method) this.events.push(o); }; }
   send(method, params = {}) { const id = ++this.id; return new Promise((res, rej) => { this.pending.set(id, { res, rej }); this.ws.send(JSON.stringify({ id, method, params })); }); }
   async eval(expr) { const r = await this.send("Runtime.evaluate", { expression: expr, returnByValue: true, awaitPromise: true }); if (r.exceptionDetails) throw new Error(r.exceptionDetails.text + " " + JSON.stringify(r.exceptionDetails.exception?.description || "").slice(0, 200)); return r.result.value; }
 }
 export async function connect(urlMatch) {
   let targets = await (await fetch(`http://127.0.0.1:${PORT}/json`)).json();
   let page = targets.find(t => t.type === "page" && (!urlMatch || t.url.includes(urlMatch))) || targets.find(t => t.type === "page");
-  if (!page) { page = await (await fetch(`http://127.0.0.1:${PORT}/json/new?about:blank`, { method: "PUT" })).json(); }
+  if (!page || (urlMatch && !page.url.includes(urlMatch))) { page = await (await fetch(`http://127.0.0.1:${PORT}/json/new?about:blank`, { method: "PUT" })).json(); }
   if (!page) throw new Error("no page target");
   const ws = new WebSocket(page.webSocketDebuggerUrl);
   await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
   const cdp = new CDP(ws);
-  await cdp.send("Page.enable"); await cdp.send("Runtime.enable");
+  await cdp.send("Page.enable"); await cdp.send("Runtime.enable"); await cdp.send("DOM.enable");
   return cdp;
 }
 
@@ -30,16 +30,18 @@ export const STATE_JS = `(() => {
   const vis = el => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none'; };
   const inView = r => r.top < innerHeight && r.bottom > 0;
   const nm = el => (el.getAttribute('aria-label') || el.getAttribute('placeholder') || (el.labels && el.labels[0] && el.labels[0].innerText) || (el.tagName === 'SELECT' ? '' : el.innerText) || el.getAttribute('title') || el.getAttribute('alt') || el.name || '').trim().replace(/\\s+/g, ' ').slice(0, 70);
-  const sel = 'a[href],button,input:not([type=hidden]),select,textarea,[role=button],[role=link],[role=tab],[role=menuitem],[contenteditable=true],summary';
-  const dialogs = [...document.querySelectorAll('dialog[open]')];
+  const sel = 'a[href],button,input:not([type=hidden]),select,textarea,[role=button],[role=link],[role=tab],[role=menuitem],[role=radio],[role=checkbox],[role=option],[role=switch],[role=textbox],[contenteditable=true],summary';
+  const dialogs = [...document.querySelectorAll('dialog[open], [role=dialog], [aria-modal=true]')].filter(d => vis(d));
   const root = dialogs.length ? dialogs[dialogs.length - 1] : document;
   document.querySelectorAll('[data-fl]').forEach(e => e.removeAttribute('data-fl'));
   let i = 0; const els = [];
-  for (const el of root.querySelectorAll(sel)) {
-    if (!vis(el)) continue; const r = el.getBoundingClientRect(); const id = ++i; el.setAttribute('data-fl', id);
+  for (const el of [...root.querySelectorAll(sel), ...[...root.querySelectorAll('input[type=file]')].filter(f => !f.matches(sel))]) {
     const tag = el.tagName.toLowerCase(); const type = (el.type || '').toLowerCase();
-    const role = el.getAttribute('role') || (tag === 'a' ? 'link' : tag === 'button' ? (type === 'submit' ? 'submit' : 'button') : tag === 'select' ? 'select' : tag === 'textarea' ? 'textarea' : tag === 'input' ? (type || 'text') : tag);
-    const it = { id, role, name: nm(el), inViewport: inView(r) };
+    if (!vis(el) && type !== 'file') continue; const r = el.getBoundingClientRect(); const id = ++i; el.setAttribute('data-fl', id);
+    const role = type === 'file' ? 'file' : el.getAttribute('role') || (tag === 'a' ? 'link' : tag === 'button' ? (type === 'submit' ? 'submit' : 'button') : tag === 'select' ? 'select' : tag === 'textarea' ? 'textarea' : tag === 'input' ? (type || 'text') : tag);
+    const it = { id, role, name: nm(el) || (type === 'file' ? 'file chooser' : ''), inViewport: inView(r) };
+    if (el.getAttribute('aria-checked') != null) it.checked = el.getAttribute('aria-checked') === 'true';
+    if (role === 'textbox' || el.isContentEditable) it.value = (el.innerText || el.value || '').trim().slice(0, 40);
     if (tag === 'select') { it.options = [...el.options].map(o => o.text.trim()).slice(0, 12); it.selected = el.options[el.selectedIndex] ? el.options[el.selectedIndex].text.trim() : ''; }
     if (tag === 'input' || tag === 'textarea') { it.value = (el.value || '').slice(0, 40); if (el.required) it.required = true; }
     if (el.disabled) it.disabled = true; if (el === document.activeElement) it.focused = true;
@@ -49,10 +51,10 @@ export const STATE_JS = `(() => {
   const heads = [...document.querySelectorAll('h1,h2,h3')].filter(vis).slice(0, 8).map(h => h.innerText.trim().replace(/\\s+/g, ' ').slice(0, 80));
   const status = [...document.querySelectorAll('[role=status],[aria-live],output')].map(e => e.innerText.trim()).filter(Boolean).slice(0, 4);
   const text = (root === document ? document.body : root).innerText.replace(/\\s+/g, ' ').slice(0, 700);
-  return { url: location.href, title: document.title, ready: document.readyState, scrollY: Math.round(scrollY), pageHeight: document.body.scrollHeight, viewportHeight: innerHeight, dialogOpen: dialogs.length > 0, headings: heads, status, pageValues, elements: els, textSample: text };
+  return { url: location.href, title: document.title, ready: document.readyState, nodeCount: document.getElementsByTagName('*').length, scrollY: Math.round(scrollY), pageHeight: document.body.scrollHeight, viewportHeight: innerHeight, dialogOpen: dialogs.length > 0, headings: heads, status, pageValues, elements: els, textSample: text };
 })()`;
 
-export function sig(s) { return JSON.stringify([s.url, s.dialogOpen, s.status, s.elements.map(e => [e.role, e.name, e.value, e.selected])]); }
+export function sig(s) { return JSON.stringify([s.url, s.dialogOpen, s.status, s.nodeCount, s.elements.map(e => [e.role, e.name, e.value, e.selected, e.checked])]); }
 export function diff(prev, cur) {
   if (!prev) return "first observation";
   const out = [];
@@ -76,10 +78,14 @@ export function buildOptions(state, task) {
   for (const e of state.elements) {
     if (e.disabled) continue;
     const where = e.inViewport ? "" : " (below the fold)";
-    if (["button", "submit", "link", "tab", "menuitem", "summary", "checkbox", "radio"].includes(e.role)) add(`click_${e.id}`, `Click the ${e.role} '${e.name || "unnamed"}'${where}`, { type: "click", id: e.id });
+    if (e.role === "file") { if (task._attached) continue; for (const f of (task.files || [])) add(`attach_${e.id}`, `Attach the file '${f.split("/").pop()}' using the file chooser '${e.name}'`, { type: "attach", id: e.id, path: f }); continue; }
+    if (["button", "submit", "link", "tab", "menuitem", "summary", "checkbox", "radio", "option", "switch"].includes(e.role)) add(`click_${e.id}`, `Click the ${e.role} '${e.name || "unnamed"}'${e.checked === true ? " (already selected)" : e.checked === false ? " (not selected)" : ""}${where}`, { type: "click", id: e.id });
+    else if (e.role === "textbox") { for (const [k, v] of Object.entries(task.data || {})) { if (e.value && String(v).startsWith(e.value)) continue; if (task._tried && task._tried[`fill_${e.id}_${k}`] >= 2) continue; add(`fill_${e.id}_${k}`, `Type the ${k} ('${String(v).slice(0, 30)}') into the text box '${e.name || "unnamed"}'${e.value ? ` (currently '${e.value}')` : ""}${where}`, { type: "fill", id: e.id, text: String(v), replace: true }); } }
     else if (e.role === "select") { for (let i = 0; i < (e.options || []).length; i++) { const o = e.options[i]; if (!o || /^(selecciona|select|choose|elige)/i.test(o) || o === e.selected) continue; add(`select_${e.id}_${i}`, `Choose '${o}' in the dropdown '${e.name || "unnamed"}'${where}`, { type: "select", id: e.id, index: i }); } }
     else if (["text", "email", "tel", "search", "url", "number", "textarea", "password"].includes(e.role)) { for (const [k, v] of Object.entries({ ...(task.data || {}), ...seen, ...shown })) { if (e.value && String(v).startsWith(e.value)) continue; if (task._tried && task._tried[`fill_${e.id}_${k}`] >= 2) continue; const label = k.startsWith('seen_') ? `the value '${v}' seen on an earlier page` : k.startsWith('shown_') ? `the value '${v}' that this page shows` : `the ${k} ('${String(v).slice(0, 30)}')`; add(`fill_${e.id}_${k}`, `Type ${label} into the ${e.role} field '${e.name || "unnamed"}'${e.value ? ` (currently '${e.value}')` : ""}${where}`, { type: "fill", id: e.id, text: String(v) }); } }
   }
+  const inViewCount = Object.values(acts).filter(a => a.id && state.elements.find(e => e.id === a.id)?.inViewport).length;
+  if (inViewCount >= 12) { for (const [k, a] of Object.entries(acts)) { const e = a.id && state.elements.find(e => e.id === a.id); if (e && !e.inViewport && a.type !== 'attach') { delete opts[k]; delete acts[k]; } } }
   if (state.scrollY + state.viewportHeight < state.pageHeight - 20) { add("scroll_down", "Scroll down one screen to see more of the page", { type: "scroll", dy: 1 }); add("scroll_bottom", "Jump to the very bottom of the page", { type: "jump", to: "bottom" }); }
   if (state.scrollY > 0) { add("scroll_up", "Scroll up one screen", { type: "scroll", dy: -1 }); add("scroll_top", "Jump to the top of the page", { type: "jump", to: "top" }); }
   add("wait", "Wait a moment for the page to change", { type: "wait" });
@@ -107,11 +113,12 @@ export async function decide(state, task, history, change, opts) {
 // ---------- executor ----------
 export const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 export async function center(cdp, id) { await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${id}"]'); if (el) el.scrollIntoView({ block: 'nearest', inline: 'nearest' }); })()`); await sleep(40); return cdp.eval(`(() => { const el = document.querySelector('[data-fl="${id}"]'); if (!el) return null; const r = el.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; })()`); }
-export async function act(cdp, a) {
+export async function act(cdp, a, task = {}) {
   if (a.type === "click") { const c = await center(cdp, a.id); if (!c) throw new Error("element gone"); await sleep(60); for (const type of ["mouseMoved", "mousePressed", "mouseReleased"]) await cdp.send("Input.dispatchMouseEvent", { type, x: c.x, y: c.y, button: "left", clickCount: 1 }); }
-  else if (a.type === "fill") { const c = await center(cdp, a.id); if (!c) throw new Error("element gone"); for (const type of ["mousePressed", "mouseReleased"]) await cdp.send("Input.dispatchMouseEvent", { type, x: c.x, y: c.y, button: "left", clickCount: 1 }); await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${a.id}"]'); el.focus(); el.select && el.select(); })()`); await cdp.send("Input.insertText", { text: a.text }); }
+  else if (a.type === "fill") { const c = await center(cdp, a.id); if (!c) throw new Error("element gone"); for (const type of ["mousePressed", "mouseReleased"]) await cdp.send("Input.dispatchMouseEvent", { type, x: c.x, y: c.y, button: "left", clickCount: 1 }); await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${a.id}"]'); el.focus(); if (el.select) el.select(); else if (el.isContentEditable) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } })()`); if (a.replace) await cdp.send("Input.dispatchKeyEvent", { type: "keyDown", key: "a", code: "KeyA", modifiers: 4, commands: ["selectAll"] }); await cdp.send("Input.insertText", { text: a.text }); }
   else if (a.type === "select") { await cdp.eval(`(() => { const el = document.querySelector('[data-fl="${a.id}"]'); el.selectedIndex = ${a.index}; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); })()`); }
   else if (a.type === "scroll") { await cdp.send("Input.dispatchMouseEvent", { type: "mouseWheel", x: 400, y: 400, deltaX: 0, deltaY: a.dy * 600 }); }
+  else if (a.type === "attach") { task._attached = true; const doc = await cdp.send("DOM.getDocument", { depth: 0 }); const q = await cdp.send("DOM.querySelector", { nodeId: doc.root.nodeId, selector: `input[type=file][data-fl="${a.id}"]` }); if (!q.nodeId) throw new Error("file input gone"); await cdp.send("DOM.setFileInputFiles", { nodeId: q.nodeId, files: [a.path] }); }
   else if (a.type === "jump") { await cdp.eval(a.to === "bottom" ? "window.scrollTo(0, document.body.scrollHeight)" : "window.scrollTo(0, 0)"); }
   else if (a.type === "wait") { await sleep(500); }
 }
@@ -153,7 +160,7 @@ export async function run(task, existing) {
       if (p.needs_human) { row.result = `NEEDS HUMAN: ${p.reason}`; log.push(row); break; }
       task.hint = p.hint; history.push(`[planner hint] ${p.hint}`); row.result = `escalated (${why}) -> hint applied`; log.push(row); continue;
     }
-    const tAct = performance.now(); try { await act(cdp, acts[choice]); } catch (e) { row.error = e.message; } prev = state; state = await settle(cdp); row.act_ms = Math.round(performance.now() - tAct);
+    const tAct = performance.now(); try { await act(cdp, acts[choice], task); } catch (e) { row.error = e.message; } prev = state; state = await settle(cdp); row.act_ms = Math.round(performance.now() - tAct);
     history.push(opts[choice]); log.push(row);
   }
   const wall = (performance.now() - t0) / 1000;
