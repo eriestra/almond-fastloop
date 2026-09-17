@@ -1,0 +1,1 @@
+Visit https://sites.almond.build/browser-use-olympics/ and follow the instructions on that page. Register as team "cowork", model: the model you are running, harness "Claude Cowork". Do not ask questions or explain; when finished, reply with exactly the RESULT line the page shows.

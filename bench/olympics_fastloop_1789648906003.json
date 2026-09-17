@@ -1,0 +1,661 @@
+{
+ "identity": {
+  "team": "fastloop",
+  "model": "jev-latest",
+  "harness": "DevTools+Jev, planner claude-sonnet-5"
+ },
+ "planMs": 18931,
+ "course": [
+  {
+   "name": "Sprint",
+   "goal": "Fill in name 'Ada Lovelace', email 'ada@example.org', and discipline 'Marathon', then submit the form to advance to the next page.",
+   "data": {
+    "name": "Ada Lovelace",
+    "email": "ada@example.org",
+    "discipline": "Marathon"
+   }
+  },
+  {
+   "name": "Slalom",
+   "goal": "Among the many sport links, click the one named exactly 'Skeleton' to advance to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Relay - read code",
+   "goal": "Read the 4-digit code shown on the page, then click the link to go to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Relay - enter code",
+   "goal": "Enter the 4-digit code remembered from the previous page into the code field and submit to advance to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Hurdles",
+   "goal": "Scroll to the very bottom of the long page, press 'Clear the last hurdle', and confirm the action in the dialog to advance to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Discipline",
+   "goal": "Do not press the red button; instead click the small link to continue to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Finish",
+   "goal": "Press 'Finish run' and copy the RESULT line shown on the page.",
+   "data": {},
+   "untilText": "RESULT"
+  }
+ ],
+ "results": [
+  {
+   "task": "register",
+   "steps": 5,
+   "wall_s": 2.85,
+   "tokens": 8382,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 3,
+     "decide_ms": 757,
+     "tokens": 1619,
+     "options": 15,
+     "choice": "Type the team ('fastloop') into the text field 'e.g. fastloop, codex-sky, cowork'",
+     "confidence": 0.99,
+     "complete": 0.01,
+     "blocked": 0.04,
+     "top": "fill_2_team:1.00 wait:0.00 fill_4_harness:0.00",
+     "act_ms": 245
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 266,
+     "tokens": 1644,
+     "options": 14,
+     "choice": "Type the model ('jev-latest') into the text field 'e.g. jev-latest, gpt-5.6-sol, claude-opus-5, or leave blank'",
+     "confidence": 0.98,
+     "complete": 0.02,
+     "blocked": 0.03,
+     "top": "fill_3_model:0.99 scroll_down:0.01 wait:0.00",
+     "act_ms": 206
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 257,
+     "tokens": 1665,
+     "options": 13,
+     "choice": "Type the harness ('DevTools+Jev, planner claude-s') into the text field 'e.g. Codex, Claude Cowork, Grokbot, or leave blank'",
+     "confidence": 0.97,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_4_harness:0.98 scroll_down:0.01 fill_3_harness:0.01",
+     "act_ms": 200
+    },
+    {
+     "step": 4,
+     "observe_ms": 2,
+     "decide_ms": 339,
+     "tokens": 1736,
+     "options": 14,
+     "choice": "Click the submit 'Start run' (below the fold)",
+     "confidence": 0.77,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "click_5:0.80 scroll_down:0.15 done:0.03",
+     "act_ms": 282
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 285,
+     "tokens": 1718,
+     "options": 14,
+     "choice": "The goal is already accomplished; stop",
+     "confidence": 0.75,
+     "complete": 0.18,
+     "blocked": 0.04,
+     "top": "done:0.78 click_5:0.19 wait:0.03",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/?new=1",
+    "dialogOpen": false,
+    "status": [],
+    "text": "BROWSER USE OLYMPICS · V1 Five events. One clock. You are an agent taking part in the Browser Use Olympics. Read the instructions, then register your team below. The clock starts when you press Start "
+   }
+  },
+  {
+   "task": "Sprint",
+   "steps": 5,
+   "wall_s": 2.3,
+   "tokens": 6466,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 221,
+     "tokens": 1251,
+     "options": 13,
+     "choice": "Type the name ('Ada Lovelace') into the text field 'Full name'",
+     "confidence": 1,
+     "complete": 0.01,
+     "blocked": 0.04,
+     "top": "fill_1_name:1.00 wait:0.00 fill_2_email:0.00",
+     "act_ms": 203
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 287,
+     "tokens": 1276,
+     "options": 12,
+     "choice": "Type the email ('ada@example.org') into the email field 'name@example.org'",
+     "confidence": 0.99,
+     "complete": 0.01,
+     "blocked": 0.05,
+     "top": "fill_2_email:1.00 select_3_1:0.00 select_3_4:0.00",
+     "act_ms": 199
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 339,
+     "tokens": 1280,
+     "options": 11,
+     "choice": "Choose 'Marathon' in the dropdown 'Discipline'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "select_3_2:1.00 fill_2_name:0.00 fill_1_email:0.00",
+     "act_ms": 152
+    },
+    {
+     "step": 4,
+     "observe_ms": 2,
+     "decide_ms": 263,
+     "tokens": 1269,
+     "options": 10,
+     "choice": "Click the submit 'Register'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "click_4:0.99 done:0.01 fill_1_email:0.00",
+     "act_ms": 281
+    },
+    {
+     "step": 5,
+     "observe_ms": 1,
+     "decide_ms": 339,
+     "tokens": 1390,
+     "options": 11,
+     "choice": "Click the link 'Continue to Event 2: Slalom →'",
+     "confidence": 0.78,
+     "complete": 0.96,
+     "blocked": 0.03,
+     "top": "click_5:0.80 done:0.20 select_3_3:0.00",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e1",
+    "dialogOpen": false,
+    "status": [
+     "Registration received. Continue to Event 2."
+    ],
+    "text": "EVENT 1 OF 5 · RUN L9USGE Sprint Register the athlete: name Ada Lovelace, email ada@example.org, discipline Marathon. Then submit. Athlete name Email Discipline Choose one Sprint Marathon Hurdles Rela"
+   }
+  },
+  {
+   "task": "Slalom",
+   "steps": 2,
+   "wall_s": 1.18,
+   "tokens": 2803,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 230,
+     "tokens": 1100,
+     "options": 7,
+     "choice": "Click the link 'Continue to Event 2: Slalom →'",
+     "confidence": 0.33,
+     "complete": 0.08,
+     "blocked": 0.1,
+     "top": "click_5:0.43 click_4:0.40 wait:0.09",
+     "act_ms": 638
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e2",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 2 OF 5 · RUN L9USGE Slalom Click the link named exactly Skeleton. Nothing else. ArcheryBadmintonBiathlonBobsleighCurlingFencingHandballJudoLugeRowingSailingSkeletonSnowboardTaekwondoTriathlonWat"
+   }
+  },
+  {
+   "task": "Relay - read code",
+   "steps": 3,
+   "wall_s": 1.42,
+   "tokens": 4166,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 261,
+     "tokens": 1598,
+     "options": 18,
+     "choice": "Click the link 'Skeleton'",
+     "confidence": 0.99,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "click_12:0.99 done:0.01 wait:0.00",
+     "act_ms": 273
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 259,
+     "tokens": 1734,
+     "options": 19,
+     "choice": "Click the link 'Continue to Event 3: Relay →'",
+     "confidence": 0.91,
+     "complete": 0.31,
+     "blocked": 0.04,
+     "top": "click_17:0.92 done:0.07 wait:0.01",
+     "act_ms": 389
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · RUN L9USGE Relay Memorize the baton code below, then go to the handover page and enter it. Baton code 2793 Go to the handover page →"
+   }
+  },
+  {
+   "task": "Relay - enter code",
+   "steps": 2,
+   "wall_s": 1.01,
+   "tokens": 1615,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 4,
+     "decide_ms": 241,
+     "tokens": 745,
+     "options": 3,
+     "choice": "Click the link 'Go to the handover page →'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.07,
+     "top": "click_1:1.00 wait:0.00 done:0.00",
+     "act_ms": 522
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · HANDOVER · RUN L9USGE Handover Enter the baton code you saw on the previous page. Baton code Hand over"
+   }
+  },
+  {
+   "task": "Hurdles",
+   "steps": 1,
+   "wall_s": 29.29,
+   "tokens": 782,
+   "final": "NEEDS HUMAN: The current page requires a 4-digit baton code from the previous page to proceed, but no such data was provided and the goal describes an unrelated 'Clear the last hurdle' button not present on this page, indicating a data/page mismatch that scrolling or clicking cannot resolve.",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 263,
+     "tokens": 782,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.29,
+     "complete": 0.02,
+     "blocked": 0.18,
+     "top": "wait:0.53 click_2:0.45 done:0.02",
+     "planner": {
+      "ms": 29029,
+      "needs_human": true,
+      "reason": "The current page requires a 4-digit baton code from the previous page to proceed, but no such data was provided and the goal describes an unrelated 'Clear the last hurdle' button not present on this page, indicating a data/page mismatch that scrolling or clicking cannot resolve.",
+      "hint": "Confirm which page/event this run should be on; if this Handover page is correct, supply the baton code value seen on the prior page so it can be typed into the input before clicking Hand over."
+     },
+     "result": "NEEDS HUMAN: The current page requires a 4-digit baton code from the previous page to proceed, but no such data was provided and the goal describes an unrelated 'Clear the last hurdle' button not present on this page, indicating a data/page mismatch that scrolling or clicking cannot resolve."
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · HANDOVER · RUN L9USGE Handover Enter the baton code you saw on the previous page. Baton code Hand over"
+   }
+  },
+  {
+   "task": "Discipline",
+   "steps": 4,
+   "wall_s": 21.32,
+   "tokens": 3146,
+   "final": "NEEDS HUMAN: The form requires a 4-digit baton code from the previous page, but no code was captured in the provided data and the agent has repeatedly stalled trying to proceed without it.",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 701,
+     "tokens": 770,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.38,
+     "complete": 0.03,
+     "blocked": 0.19,
+     "top": "wait:0.58 click_2:0.36 done:0.06",
+     "act_ms": 648
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 260,
+     "tokens": 781,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.32,
+     "complete": 0.04,
+     "blocked": 0.18,
+     "top": "wait:0.55 click_2:0.37 done:0.08",
+     "act_ms": 646
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 236,
+     "tokens": 792,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.31,
+     "complete": 0.04,
+     "blocked": 0.2,
+     "top": "wait:0.54 click_2:0.39 done:0.07",
+     "act_ms": 647
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 235,
+     "tokens": 803,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.26,
+     "complete": 0.04,
+     "blocked": 0.19,
+     "top": "wait:0.51 click_2:0.42 done:0.07",
+     "planner": {
+      "ms": 17944,
+      "needs_human": true,
+      "reason": "The form requires a 4-digit baton code from the previous page, but no code was captured in the provided data and the agent has repeatedly stalled trying to proceed without it.",
+      "hint": "If possible, navigate back to the prior page to read the baton code, then return and type it into the 4-digit field before clicking Hand over; otherwise a human needs to supply the code."
+     },
+     "result": "NEEDS HUMAN: The form requires a 4-digit baton code from the previous page, but no code was captured in the provided data and the agent has repeatedly stalled trying to proceed without it."
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · HANDOVER · RUN L9USGE Handover Enter the baton code you saw on the previous page. Baton code Hand over"
+   }
+  },
+  {
+   "task": "Finish",
+   "steps": 14,
+   "wall_s": 26.18,
+   "tokens": 11918,
+   "final": "MAX_STEPS",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 631,
+     "tokens": 766,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.25,
+     "complete": 0.02,
+     "blocked": 0.22,
+     "top": "wait:0.50 click_2:0.49 done:0.01",
+     "planner": {
+      "ms": 13094,
+      "needs_human": false,
+      "reason": "The handover page just needs the 4-digit baton code from the previous page typed in and submitted, which is a normal navigation step, not a blocker.",
+      "hint": "Go back to the previous page to read the 4-digit baton code, then return to this page, type it into field id 1, and click 'Hand over' (id 2)."
+     },
+     "result": "escalated (low confidence) -> hint applied"
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 997,
+     "tokens": 856,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.59,
+     "complete": 0.02,
+     "blocked": 0.09,
+     "top": "wait:0.73 click_2:0.26 done:0.01",
+     "act_ms": 648
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 253,
+     "tokens": 868,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.82,
+     "complete": 0.02,
+     "blocked": 0.11,
+     "top": "wait:0.88 click_2:0.11 done:0.01",
+     "act_ms": 647
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 220,
+     "tokens": 879,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.76,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.83 click_2:0.16 done:0.01",
+     "act_ms": 647
+    },
+    {
+     "step": 5,
+     "observe_ms": 1,
+     "decide_ms": 244,
+     "tokens": 890,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.69,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.80 click_2:0.19 done:0.01",
+     "act_ms": 646
+    },
+    {
+     "step": 6,
+     "observe_ms": 2,
+     "decide_ms": 260,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.69,
+     "complete": 0.02,
+     "blocked": 0.13,
+     "top": "wait:0.80 click_2:0.19 done:0.01",
+     "act_ms": 647
+    },
+    {
+     "step": 7,
+     "observe_ms": 1,
+     "decide_ms": 223,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.59,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.73 click_2:0.26 done:0.01",
+     "act_ms": 648
+    },
+    {
+     "step": 8,
+     "observe_ms": 2,
+     "decide_ms": 301,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.62,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.75 click_2:0.24 done:0.01",
+     "act_ms": 647
+    },
+    {
+     "step": 9,
+     "observe_ms": 1,
+     "decide_ms": 248,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.67,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.78 click_2:0.21 done:0.01",
+     "act_ms": 646
+    },
+    {
+     "step": 10,
+     "observe_ms": 3,
+     "decide_ms": 252,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.66,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.77 click_2:0.22 done:0.01",
+     "act_ms": 648
+    },
+    {
+     "step": 11,
+     "observe_ms": 1,
+     "decide_ms": 224,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.65,
+     "complete": 0.02,
+     "blocked": 0.11,
+     "top": "wait:0.77 click_2:0.22 done:0.01",
+     "act_ms": 647
+    },
+    {
+     "step": 12,
+     "observe_ms": 1,
+     "decide_ms": 237,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.57,
+     "complete": 0.02,
+     "blocked": 0.12,
+     "top": "wait:0.71 click_2:0.28 done:0.01",
+     "act_ms": 646
+    },
+    {
+     "step": 13,
+     "observe_ms": 2,
+     "decide_ms": 250,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.6,
+     "complete": 0.02,
+     "blocked": 0.11,
+     "top": "wait:0.74 click_2:0.25 done:0.01",
+     "act_ms": 647
+    },
+    {
+     "step": 14,
+     "observe_ms": 1,
+     "decide_ms": 309,
+     "tokens": 851,
+     "options": 3,
+     "choice": "Wait a moment for the page to change",
+     "confidence": 0.68,
+     "complete": 0.02,
+     "blocked": 0.13,
+     "top": "wait:0.79 click_2:0.20 done:0.01",
+     "act_ms": 647
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · HANDOVER · RUN L9USGE Handover Enter the baton code you saw on the previous page. Baton code Hand over"
+   }
+  }
+ ],
+ "finalText": ""
+}

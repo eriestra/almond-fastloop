@@ -1,0 +1,579 @@
+{
+ "identity": {
+  "team": "fastloop",
+  "model": "jev-latest",
+  "harness": "DevTools+Jev, planner claude-sonnet-5"
+ },
+ "planMs": 21566,
+ "course": [
+  {
+   "name": "Sprint",
+   "goal": "Fill in the form with name Ada Lovelace, email ada@example.org, and discipline Marathon, then submit to advance to the next event.",
+   "data": {
+    "name": "Ada Lovelace",
+    "email": "ada@example.org",
+    "discipline": "Marathon"
+   }
+  },
+  {
+   "name": "Slalom",
+   "goal": "Among the many sport links, click the one named exactly Skeleton to advance to the next event.",
+   "data": {}
+  },
+  {
+   "name": "Relay: read code",
+   "goal": "Read the 4-digit code shown on the page, then go to the next page.",
+   "data": {}
+  },
+  {
+   "name": "Relay: enter code",
+   "goal": "Enter the 4-digit code remembered from the previous page into the code field and submit to advance to the next event.",
+   "data": {}
+  },
+  {
+   "name": "Hurdles",
+   "goal": "Scroll to the very bottom of the long page, press Clear the last hurdle, and confirm in the dialog to advance to the next event.",
+   "data": {}
+  },
+  {
+   "name": "Discipline",
+   "goal": "Do not press the red button; instead click the small link to continue to the next event.",
+   "data": {}
+  },
+  {
+   "name": "Finish",
+   "goal": "Press Finish run and copy the RESULT line shown on the page.",
+   "data": {},
+   "untilText": "RESULT: run"
+  }
+ ],
+ "results": [
+  {
+   "task": "register",
+   "steps": 6,
+   "wall_s": 2.94,
+   "tokens": 8292,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 681,
+     "tokens": 1601,
+     "options": 14,
+     "choice": "Type the team ('fastloop') into the text field 'e.g. fastloop, codex-sky, cowork'",
+     "confidence": 0.99,
+     "complete": 0.01,
+     "blocked": 0.04,
+     "top": "fill_2_team:1.00 fill_4_team:0.00 fill_3_model:0.00",
+     "act_ms": 199
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 229,
+     "tokens": 1626,
+     "options": 13,
+     "choice": "Type the model ('jev-latest') into the text field 'e.g. jev-latest, gpt-5.6-sol, claude-opus-5, or leave blank'",
+     "confidence": 0.97,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_3_model:0.98 scroll_down:0.02 wait:0.00",
+     "act_ms": 203
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 305,
+     "tokens": 1647,
+     "options": 12,
+     "choice": "Type the harness ('DevTools+Jev, planner claude-s') into the text field 'e.g. Codex, Claude Cowork, Grokbot, or leave blank'",
+     "confidence": 0.97,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_4_harness:0.98 scroll_down:0.01 fill_3_harness:0.01",
+     "act_ms": 199
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 324,
+     "tokens": 1718,
+     "options": 13,
+     "choice": "Click the submit 'Start run' (below the fold)",
+     "confidence": 0.72,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "click_5:0.75 scroll_down:0.22 scroll_bottom:0.02",
+     "act_ms": 266
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 274,
+     "tokens": 1700,
+     "options": 13,
+     "choice": "Click the submit 'Start run'",
+     "confidence": 0.65,
+     "complete": 0.16,
+     "blocked": 0.04,
+     "top": "click_5:0.68 wait:0.31 scroll_down:0.01",
+     "error": "element gone",
+     "act_ms": 246
+    },
+    {
+     "step": 6,
+     "observe_ms": 2,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e1",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 1 OF 5 · RUN OWFCXN Sprint Register the athlete: name Ada Lovelace, email ada@example.org, discipline Marathon. Then submit. Athlete name Email Discipline Choose one Sprint Marathon Hurdles Rela"
+   }
+  },
+  {
+   "task": "Sprint",
+   "steps": 6,
+   "wall_s": 2.54,
+   "tokens": 6351,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 263,
+     "tokens": 1228,
+     "options": 12,
+     "choice": "Type the name ('Ada Lovelace') into the text field 'Full name'",
+     "confidence": 1,
+     "complete": 0.01,
+     "blocked": 0.04,
+     "top": "fill_1_name:1.00 fill_1_email:0.00 fill_2_name:0.00",
+     "act_ms": 199
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 262,
+     "tokens": 1253,
+     "options": 11,
+     "choice": "Type the email ('ada@example.org') into the email field 'name@example.org'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "fill_2_email:1.00 select_3_4:0.00 click_4:0.00",
+     "act_ms": 198
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 247,
+     "tokens": 1257,
+     "options": 10,
+     "choice": "Choose 'Marathon' in the dropdown 'Discipline'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "select_3_2:1.00 fill_2_discipline:0.00 select_3_4:0.00",
+     "act_ms": 150
+    },
+    {
+     "step": 4,
+     "observe_ms": 2,
+     "decide_ms": 253,
+     "tokens": 1246,
+     "options": 9,
+     "choice": "Click the submit 'Register'",
+     "confidence": 1,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "click_4:1.00 select_3_4:0.00 fill_1_email:0.00",
+     "act_ms": 258
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 264,
+     "tokens": 1367,
+     "options": 10,
+     "choice": "Click the link 'Continue to Event 2: Slalom →'",
+     "confidence": 0.99,
+     "complete": 0.94,
+     "blocked": 0.04,
+     "top": "click_5:1.00 fill_1_discipline:0.00 fill_2_name:0.00",
+     "act_ms": 435
+    },
+    {
+     "step": 6,
+     "observe_ms": 2,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e2",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 2 OF 5 · RUN OWFCXN Slalom Click the link named exactly Skeleton. Nothing else. ArcheryBadmintonBiathlonBobsleighCurlingFencingHandballJudoLugeRowingSailingSkeletonSnowboardTaekwondoTriathlonWat"
+   }
+  },
+  {
+   "task": "Slalom",
+   "steps": 3,
+   "wall_s": 1.2,
+   "tokens": 3288,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 315,
+     "tokens": 1576,
+     "options": 17,
+     "choice": "Click the link 'Skeleton'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.03,
+     "top": "click_12:1.00 click_2:0.00 click_8:0.00",
+     "act_ms": 265
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 248,
+     "tokens": 1712,
+     "options": 18,
+     "choice": "Click the link 'Continue to Event 3: Relay →'",
+     "confidence": 0.88,
+     "complete": 0.97,
+     "blocked": 0.03,
+     "top": "click_17:0.89 wait:0.09 click_12:0.02",
+     "act_ms": 362
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · RUN OWFCXN Relay Memorize the baton code below, then go to the handover page and enter it. Baton code 6770 Go to the handover page →"
+   }
+  },
+  {
+   "task": "Relay: read code",
+   "steps": 2,
+   "wall_s": 0.65,
+   "tokens": 720,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 263,
+     "tokens": 720,
+     "options": 2,
+     "choice": "Click the link 'Go to the handover page →'",
+     "confidence": 0.99,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "click_1:0.99 wait:0.01",
+     "act_ms": 381
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 3 OF 5 · HANDOVER · RUN OWFCXN Handover Enter the baton code you saw on the previous page. Baton code Hand over"
+   }
+  },
+  {
+   "task": "Relay: enter code",
+   "steps": 4,
+   "wall_s": 1.81,
+   "tokens": 2520,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 248,
+     "tokens": 794,
+     "options": 3,
+     "choice": "Type the value '6770' seen on an earlier page into the text field '4 digits'",
+     "confidence": 0.71,
+     "complete": 0.02,
+     "blocked": 0.34,
+     "top": "fill_1_seen_0:0.80 wait:0.19 click_2:0.01",
+     "act_ms": 201
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 382,
+     "tokens": 800,
+     "options": 2,
+     "choice": "Click the submit 'Hand over'",
+     "confidence": 1,
+     "complete": 0.04,
+     "blocked": 0.05,
+     "top": "click_2:1.00 wait:0.00",
+     "act_ms": 264
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 276,
+     "tokens": 926,
+     "options": 3,
+     "choice": "Click the link 'Continue to Event 4: Hurdles →'",
+     "confidence": 0.97,
+     "complete": 0.96,
+     "blocked": 0.04,
+     "top": "click_3:0.98 wait:0.02 click_2:0.00",
+     "act_ms": 433
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e4",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 4 OF 5 · RUN OWFCXN Hurdles The finish button is at the very bottom of this long page. Press it, then confirm in the dialog. Hurdle 1 Not this one. Keep going down the track. Hurdle 2 Not this o"
+   }
+  },
+  {
+   "task": "Hurdles",
+   "steps": 5,
+   "wall_s": 2.07,
+   "tokens": 3948,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 260,
+     "tokens": 948,
+     "options": 4,
+     "choice": "Jump to the very bottom of the page",
+     "confidence": 0.89,
+     "complete": 0.01,
+     "blocked": 0.04,
+     "top": "scroll_bottom:0.92 scroll_down:0.08 wait:0.00",
+     "act_ms": 153
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 259,
+     "tokens": 956,
+     "options": 4,
+     "choice": "Click the button 'Clear the last hurdle'",
+     "confidence": 0.99,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "click_1:1.00 scroll_top:0.00 scroll_up:0.00",
+     "act_ms": 258
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 261,
+     "tokens": 883,
+     "options": 5,
+     "choice": "Click the button 'Confirm'",
+     "confidence": 1,
+     "complete": 0.06,
+     "blocked": 0.08,
+     "top": "click_1:1.00 wait:0.00 scroll_up:0.00",
+     "act_ms": 263
+    },
+    {
+     "step": 4,
+     "observe_ms": 2,
+     "decide_ms": 245,
+     "tokens": 1161,
+     "options": 7,
+     "choice": "Click the link 'Continue to Event 5: Discipline →'",
+     "confidence": 0.98,
+     "complete": 0.89,
+     "blocked": 0.03,
+     "top": "click_2:0.99 wait:0.01 scroll_down:0.00",
+     "act_ms": 358
+    },
+    {
+     "step": 5,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e5",
+    "dialogOpen": false,
+    "status": [],
+    "text": "EVENT 5 OF 5 · RUN OWFCXN Discipline Do not press the red button. Use the small link below it to continue. Delete everything I will not press it, continue"
+   }
+  },
+  {
+   "task": "Discipline",
+   "steps": 3,
+   "wall_s": 1.17,
+   "tokens": 1660,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 309,
+     "tokens": 768,
+     "options": 3,
+     "choice": "Click the link 'I will not press it, continue'",
+     "confidence": 1,
+     "complete": 0.04,
+     "blocked": 0.04,
+     "top": "click_2:1.00 click_1:0.00 wait:0.00",
+     "act_ms": 267
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 225,
+     "tokens": 892,
+     "options": 4,
+     "choice": "Click the link 'Go to the finish →'",
+     "confidence": 0.98,
+     "complete": 0.34,
+     "blocked": 0.04,
+     "top": "click_3:0.99 wait:0.01 click_2:0.00",
+     "act_ms": 359
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/finish",
+    "dialogOpen": false,
+    "status": [],
+    "text": "FINISH · RUN OWFCXN Finish line Press Finish run. Then reply with exactly the RESULT line shown. Finish run See the Hall of Fame. Start another run from the start page."
+   }
+  },
+  {
+   "task": "Finish",
+   "steps": 2,
+   "wall_s": 0.58,
+   "tokens": 805,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 312,
+     "tokens": 805,
+     "options": 4,
+     "choice": "Click the button 'Finish run'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "click_1:1.00 click_3:0.00 click_2:0.00",
+     "act_ms": 263
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/finish",
+    "dialogOpen": false,
+    "status": [
+     "Run recorded."
+    ],
+    "text": "FINISH · RUN OWFCXN Finish line Press Finish run. Then reply with exactly the RESULT line shown. Finish run RESULT: run OWFCXN team fastloop model jev-latest harness DevTools+Jev, planner claude-sonne"
+   }
+  }
+ ],
+ "finalText": "RESULT: run OWFCXN team fastloop model jev-latest harness DevTools+Jev, planner claude-sonnet-5 events 5/5 total 11.6s"
+}

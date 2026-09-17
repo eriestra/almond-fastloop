@@ -1,0 +1,7 @@
+Benchmark task. Using the browser, open https://sites.almond.build/almond-demo-taller-barrio/ and fill in the booking form, then submit it until a confirmation message is shown.
+Data to enter:
+- Nombre de prueba: Visitante de prueba
+- ¿Qué te gustaría explorar?: Modelado a mano
+- Horario preferido: Sábado
+Then click "Enviar solicitud de prueba".
+Do not explain or ask questions; just do it. When done, reply with exactly one line: RESULT: <the confirmation text you saw>.

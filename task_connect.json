@@ -1,0 +1,1 @@
+{"name":"Open the connect dialog and copy the connection line","url":"https://sites.almond.build/almond-landing-draft/","urlMatch":"almond","goal":"On the Almond landing page, open the 'Connect my agent' dialog and press its Copy button so the connection line is copied (the copy label should read 'Copied')."}

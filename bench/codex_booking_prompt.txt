@@ -1,0 +1,11 @@
+Benchmark task (Codex + Sky computer use). Use ONLY node_repl with @oai/sky to operate Google Chrome. Do not use curl, DOM scripting, or other tools. Do not explain; act.
+
+Goal: In Google Chrome, open https://sites.almond.build/almond-demo-taller-barrio/ (use the address bar), then fill in the booking form and submit it until a confirmation message is shown.
+Data to type:
+- Nombre de prueba: Visitante de prueba
+- ¿Qué te gustaría explorar?: Modelado a mano
+- Horario preferido: Sábado
+Then click the submit button ("Enviar solicitud de prueba").
+
+Procedure: bootstrap sky once (globalThis.sky = (await import("@oai/sky")).sky), then loop: get_app_state → decide → act, re-reading get_app_state after every action. Stop when the page shows the confirmation ("Solicitud de prueba recibida").
+When done, print exactly one line: RESULT: <confirmation text you saw>.

@@ -1,0 +1,622 @@
+{
+ "identity": {
+  "team": "fastloop",
+  "model": "jev-latest",
+  "harness": "DevTools+Jev, planner claude-sonnet-5"
+ },
+ "planMs": 13898,
+ "course": [
+  {
+   "name": "Sprint",
+   "goal": "Fill in the exact name, email, and discipline shown on this page into the registration form and submit it to advance to the Slalom event.",
+   "data": {}
+  },
+  {
+   "name": "Slalom",
+   "goal": "Read which one of the sixteen sport links the page names, click exactly that link, and advance to the Relay event.",
+   "data": {}
+  },
+  {
+   "name": "Relay - read code",
+   "goal": "Read the 4-digit code shown on this page and click through to the next page where it must be entered.",
+   "data": {}
+  },
+  {
+   "name": "Relay - enter code",
+   "goal": "Enter the 4-digit code remembered from the previous page into the input field and submit to advance to the Hurdles event.",
+   "data": {}
+  },
+  {
+   "name": "Hurdles",
+   "goal": "Scroll to the very bottom of the long page, press 'Clear the last hurdle', and confirm the dialog to advance to the Discipline event.",
+   "data": {}
+  },
+  {
+   "name": "Discipline",
+   "goal": "Do not press the red button; instead click the small link under it to advance to the Finish page.",
+   "data": {}
+  },
+  {
+   "name": "Finish",
+   "goal": "Report the tokens used so far in this run (input and output, or 'unknown' if not reported) into the finish page field, then press Finish run.",
+   "data": {},
+   "untilText": "RESULT: run"
+  }
+ ],
+ "results": [
+  {
+   "task": "register",
+   "steps": 6,
+   "wall_s": 3.16,
+   "tokens": 12882,
+   "tokens_out": 1735,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 3,
+     "decide_ms": 752,
+     "tokens": 2499,
+     "options": 28,
+     "choice": "Type the team ('fastloop') into the text field 'e.g. fastloop, codex-sky, cowork' (below the fold)",
+     "confidence": 0.52,
+     "complete": 0.01,
+     "blocked": 0.05,
+     "top": "fill_4_team:0.55 scroll_down:0.44 scroll_bottom:0.01",
+     "act_ms": 207
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 312,
+     "tokens": 2557,
+     "options": 29,
+     "choice": "Type the model ('jev-latest') into the text field 'e.g. jev-latest, gpt-5.6-sol, claude-opus-5, or leave blank' (below the fold)",
+     "confidence": 0.66,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "fill_5_model:0.69 scroll_down:0.31 fill_4_shown_1:0.00",
+     "act_ms": 202
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 319,
+     "tokens": 2574,
+     "options": 28,
+     "choice": "Type the harness ('DevTools+Jev, planner claude-s') into the text field 'e.g. Codex, Claude Cowork, Grokbot, or leave blank' (below the fold)",
+     "confidence": 0.77,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "fill_6_harness:0.79 scroll_down:0.19 click_7:0.01",
+     "act_ms": 205
+    },
+    {
+     "step": 4,
+     "observe_ms": 6,
+     "decide_ms": 315,
+     "tokens": 2635,
+     "options": 27,
+     "choice": "Click the submit 'Start run' (below the fold)",
+     "confidence": 0.72,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "click_7:0.74 scroll_down:0.23 scroll_up:0.02",
+     "act_ms": 270
+    },
+    {
+     "step": 5,
+     "observe_ms": 3,
+     "decide_ms": 296,
+     "tokens": 2617,
+     "options": 27,
+     "choice": "Click the submit 'Start run'",
+     "confidence": 0.75,
+     "complete": 0.17,
+     "blocked": 0.05,
+     "top": "click_7:0.77 wait:0.23 fill_4_shown_2:0.00",
+     "error": "element gone",
+     "act_ms": 264
+    },
+    {
+     "step": 6,
+     "observe_ms": 3,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e1",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 1 OF 5 · RUN JRVLIC Sprint Register the athlete: name Grace Hopper, email grace@example.org, discipline Marathon. Then submit. Athlete name Email Discipline Choose on"
+   }
+  },
+  {
+   "task": "Sprint",
+   "steps": 6,
+   "wall_s": 2.67,
+   "tokens": 7957,
+   "tokens_out": 1091,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 285,
+     "tokens": 1554,
+     "options": 17,
+     "choice": "Type the value 'Grace Hopper' that this page shows into the text field 'Full name'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.06,
+     "top": "fill_2_shown_0:0.99 select_4_2:0.01 click_7:0.00",
+     "act_ms": 203
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 353,
+     "tokens": 1572,
+     "options": 16,
+     "choice": "Type the value 'grace@example.org' that this page shows into the email field 'name@example.org'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.06,
+     "top": "fill_3_shown_1:0.99 select_4_2:0.01 fill_3_shown_0:0.00",
+     "act_ms": 200
+    },
+    {
+     "step": 3,
+     "observe_ms": 3,
+     "decide_ms": 320,
+     "tokens": 1578,
+     "options": 15,
+     "choice": "Choose 'Marathon' in the dropdown 'Discipline'",
+     "confidence": 0.72,
+     "complete": 0.03,
+     "blocked": 0.07,
+     "top": "select_4_2:0.75 select_4_1:0.15 click_5:0.10",
+     "act_ms": 150
+    },
+    {
+     "step": 4,
+     "observe_ms": 2,
+     "decide_ms": 263,
+     "tokens": 1566,
+     "options": 14,
+     "choice": "Click the submit 'Register'",
+     "confidence": 0.97,
+     "complete": 0.03,
+     "blocked": 0.05,
+     "top": "click_5:0.98 select_4_1:0.02 click_6:0.00",
+     "act_ms": 259
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 245,
+     "tokens": 1687,
+     "options": 15,
+     "choice": "Click the link 'Continue to Event 2: Slalom →'",
+     "confidence": 0.99,
+     "complete": 0.77,
+     "blocked": 0.05,
+     "top": "click_6:1.00 fill_2_shown_2:0.00 click_8:0.00",
+     "act_ms": 379
+    },
+    {
+     "step": 6,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e2",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 2 OF 5 · RUN JRVLIC Slalom Click the link named exactly Curling. Nothing else. SnowboardTriathlonRowingLugeHandballTaekwondoArcheryJudoBadmintonFencingBobsleighCurlin"
+   }
+  },
+  {
+   "task": "Slalom",
+   "steps": 3,
+   "wall_s": 1.16,
+   "tokens": 3858,
+   "tokens_out": 512,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 243,
+     "tokens": 1859,
+     "options": 21,
+     "choice": "Click the link 'Curling'",
+     "confidence": 0.99,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "click_13:1.00 click_19:0.00 click_10:0.00",
+     "act_ms": 269
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 280,
+     "tokens": 1999,
+     "options": 22,
+     "choice": "Click the link 'Continue to Event 3: Relay →'",
+     "confidence": 1,
+     "complete": 0.24,
+     "blocked": 0.04,
+     "top": "click_18:1.00 click_9:0.00 click_5:0.00",
+     "act_ms": 360
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 3 OF 5 · RUN JRVLIC Relay Memorize the baton code below, then go to the handover page and enter it. Baton code 4912 Go to the handover page → Browser Use Olympics by "
+   }
+  },
+  {
+   "task": "Relay - read code",
+   "steps": 2,
+   "wall_s": 0.63,
+   "tokens": 990,
+   "tokens_out": 104,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 258,
+     "tokens": 990,
+     "options": 6,
+     "choice": "Click the link 'Go to the handover page →'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "click_2:1.00 click_5:0.00 click_3:0.00",
+     "act_ms": 367
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e3b",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 3 OF 5 · HANDOVER · RUN JRVLIC Handover Enter the baton code you saw on the previous page. Baton code Hand over Browser Use Olympics by Almond · the site, the clock a"
+   }
+  },
+  {
+   "task": "Relay - enter code",
+   "steps": 4,
+   "wall_s": 1.67,
+   "tokens": 3321,
+   "tokens_out": 336,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 251,
+     "tokens": 1061,
+     "options": 7,
+     "choice": "Type the value '4912' seen on an earlier page into the text field '4 digits'",
+     "confidence": 0.91,
+     "complete": 0.02,
+     "blocked": 0.21,
+     "top": "fill_2_seen_0:0.93 wait:0.06 click_1:0.01",
+     "act_ms": 203
+    },
+    {
+     "step": 2,
+     "observe_ms": 1,
+     "decide_ms": 308,
+     "tokens": 1067,
+     "options": 6,
+     "choice": "Click the submit 'Hand over'",
+     "confidence": 1,
+     "complete": 0.05,
+     "blocked": 0.05,
+     "top": "click_3:1.00 wait:0.00 click_4:0.00",
+     "act_ms": 261
+    },
+    {
+     "step": 3,
+     "observe_ms": 2,
+     "decide_ms": 286,
+     "tokens": 1193,
+     "options": 7,
+     "choice": "Click the link 'Continue to Event 4: Hurdles →'",
+     "confidence": 0.98,
+     "complete": 0.95,
+     "blocked": 0.04,
+     "top": "click_4:0.99 wait:0.01 click_7:0.00",
+     "act_ms": 356
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e4",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 4 OF 5 · RUN JRVLIC Hurdles The finish button is at the very bottom of this long page. Press it, then confirm in the dialog. Hurdle 1 Not this one. Keep going down th"
+   }
+  },
+  {
+   "task": "Hurdles",
+   "steps": 5,
+   "wall_s": 2.09,
+   "tokens": 4816,
+   "tokens_out": 477,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 236,
+     "tokens": 1228,
+     "options": 8,
+     "choice": "Jump to the very bottom of the page",
+     "confidence": 0.93,
+     "complete": 0.02,
+     "blocked": 0.05,
+     "top": "scroll_bottom:0.94 scroll_down:0.06 click_3:0.00",
+     "act_ms": 149
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 282,
+     "tokens": 1226,
+     "options": 8,
+     "choice": "Click the button 'Clear the last hurdle'",
+     "confidence": 0.99,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "click_2:1.00 click_4:0.00 click_3:0.00",
+     "act_ms": 273
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 248,
+     "tokens": 915,
+     "options": 5,
+     "choice": "Click the button 'Confirm'",
+     "confidence": 1,
+     "complete": 0.04,
+     "blocked": 0.09,
+     "top": "click_1:1.00 click_2:0.00 wait:0.00",
+     "act_ms": 263
+    },
+    {
+     "step": 4,
+     "observe_ms": 3,
+     "decide_ms": 258,
+     "tokens": 1447,
+     "options": 11,
+     "choice": "Click the link 'Continue to Event 5: Discipline →'",
+     "confidence": 0.99,
+     "complete": 0.86,
+     "blocked": 0.03,
+     "top": "click_3:0.99 wait:0.01 click_2:0.00",
+     "act_ms": 374
+    },
+    {
+     "step": 5,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/e5",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS EVENT 5 OF 5 · RUN JRVLIC Discipline Do not press the red button. Use the small link below it to continue. Delete everything I will not press it, continue Browser Use Olymp"
+   }
+  },
+  {
+   "task": "Discipline",
+   "steps": 3,
+   "wall_s": 1.13,
+   "tokens": 2194,
+   "tokens_out": 235,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 1,
+     "decide_ms": 222,
+     "tokens": 1035,
+     "options": 7,
+     "choice": "Click the link 'I will not press it, continue'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "click_3:1.00 click_4:0.00 wait:0.00",
+     "act_ms": 267
+    },
+    {
+     "step": 2,
+     "observe_ms": 2,
+     "decide_ms": 285,
+     "tokens": 1159,
+     "options": 8,
+     "choice": "Click the link 'Go to the finish →'",
+     "confidence": 0.99,
+     "complete": 0.09,
+     "blocked": 0.04,
+     "top": "click_4:0.99 wait:0.01 click_3:0.00",
+     "act_ms": 355
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/finish",
+    "dialogOpen": false,
+    "status": [],
+    "text": "almond BROWSER USE OLYMPICS FINISH · RUN JRVLIC Finish line Report the tokens you have used so far in this run, then press Finish run and reply with exactly the RESULT line shown. Input tokens used so"
+   }
+  },
+  {
+   "task": "Finish",
+   "steps": 5,
+   "wall_s": 2.13,
+   "tokens": 8248,
+   "tokens_out": 1128,
+   "final": "DONE",
+   "log": [
+    {
+     "step": 1,
+     "observe_ms": 2,
+     "decide_ms": 290,
+     "tokens": 1996,
+     "options": 23,
+     "choice": "Type the tokens_in ('73071') into the text field 'e.g. 48210 or unknown'",
+     "confidence": 1,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_2_tokens_in:1.00 fill_2_shown_0:0.00 click_8:0.00",
+     "act_ms": 201
+    },
+    {
+     "step": 2,
+     "observe_ms": 3,
+     "decide_ms": 326,
+     "tokens": 2049,
+     "options": 22,
+     "choice": "Type the tokens_out ('5082') into the text field 'e.g. 1900 or unknown'",
+     "confidence": 0.98,
+     "complete": 0.02,
+     "blocked": 0.04,
+     "top": "fill_3_tokens_out:0.99 fill_3_tokens_in:0.01 fill_3_seen_0:0.00",
+     "act_ms": 201
+    },
+    {
+     "step": 3,
+     "observe_ms": 1,
+     "decide_ms": 316,
+     "tokens": 2071,
+     "options": 21,
+     "choice": "Type the tokens_note ('Jev usage from API responses +') into the text field 'e.g. /usage, API response usage, estimated'",
+     "confidence": 0.98,
+     "complete": 0.03,
+     "blocked": 0.04,
+     "top": "fill_4_tokens_note:0.98 click_5:0.01 fill_3_tokens_note:0.01",
+     "act_ms": 197
+    },
+    {
+     "step": 4,
+     "observe_ms": 1,
+     "decide_ms": 325,
+     "tokens": 2132,
+     "options": 20,
+     "choice": "Click the submit 'Finish run'",
+     "confidence": 0.85,
+     "complete": 0.03,
+     "blocked": 0.06,
+     "top": "click_5:0.86 fill_4_tokens_out:0.05 fill_3_tokens_note:0.03",
+     "act_ms": 266
+    },
+    {
+     "step": 5,
+     "observe_ms": 2,
+     "decide_ms": 0,
+     "tokens": 0,
+     "options": 0,
+     "choice": "(condition met)",
+     "confidence": 1,
+     "complete": 1,
+     "blocked": 0,
+     "top": "",
+     "result": "DONE"
+    }
+   ],
+   "finalState": {
+    "url": "https://sites.almond.build/browser-use-olympics/finish",
+    "dialogOpen": false,
+    "status": [
+     "Run recorded."
+    ],
+    "text": "almond BROWSER USE OLYMPICS FINISH · RUN JRVLIC Finish line Report the tokens you have used so far in this run, then press Finish run and reply with exactly the RESULT line shown. Input tokens used so"
+   }
+  }
+ ],
+ "finalText": "RESULT: run JRVLIC team fastloop model jev-latest harness DevTools+Jev, planner claude-sonnet-5 events 5/5 total 13.1s tokens in 73071 out 5082"
+}

@@ -1,0 +1,12 @@
+{
+ "name": "Book a session on Entre Barro",
+ "url": "https://sites.almond.build/almond-demo-taller-barrio/",
+ "urlMatch": "almond",
+ "goal": "Using the browser, open https://sites.almond.build/almond-demo-taller-barrio/ and fill in the booking form, then submit it until a confirmation message is shown. Then click \"Enviar solicitud de prueba\".",
+ "data": {
+  "nombre": "Visitante de prueba",
+  "taller": "Modelado a mano",
+  "horario": "Sábado"
+ },
+ "prompt_version": "booking-v1"
+}

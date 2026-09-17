@@ -1,0 +1,6 @@
+bench/codex_*.out
+bench/codex_*.err
+bench/watch.log
+bench/codex_session_id.txt
+*.log
+.DS_Store
